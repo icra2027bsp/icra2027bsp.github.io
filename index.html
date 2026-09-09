@@ -1,0 +1,4198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="assets/logos/web_logo.png">
+
+    <!-- MathJax for inline/display math -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i&display=swap");
+        @import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:300,300i,400,400i,600,600i,700,700i&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..700;1,100..700&display=swap");
+
+        .container {
+            max-width: 810px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* ===== Left-rail table of contents ===== */
+        .page-toc {
+            position: fixed;
+            top: 200px;
+            left: 20px;
+            z-index: 60;
+            width: 165px;
+        }
+        .page-toc-title {
+            margin: 0 0 8px 10px;
+            color: #999999;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .page-toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .page-toc a {
+            display: block;
+            padding: 4px 10px;
+            border-left: 2px solid #e2d6d6;
+            color: #999999;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 13px;
+            line-height: 1.3;
+            text-decoration: none;
+            transition: color 0.15s ease, border-color 0.15s ease;
+        }
+        .page-toc a:hover {
+            color: #750014;
+            text-decoration: none;
+        }
+        .page-toc a.is-active {
+            color: #750014;
+            border-left-color: #750014;
+            font-weight: 600;
+        }
+        .page-toc .toc-sub a {
+            padding-left: 22px;
+            font-size: 12px;
+        }
+        @media (max-width: 1380px) {
+            .page-toc { display: none; }
+        }
+
+        .list-inline {
+            list-style: none;
+            margin-left: -0.5em;
+            margin-right: -0.5em;
+            padding-left: 0;
+        }
+
+        .list-inline>li {
+            display: inline-block;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+
+        a,
+        a:focus {
+            color: #750014; /* accent color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #750014; /* accent color */
+            text-decoration: underline;
+        }
+
+        .authors a,
+        .authors a:focus {
+            color: #333; /* same as main text */
+        }
+        .authors a:hover {
+            color: #333;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        b {
+            font-weight: 700;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Asap', roboto, sans-serif;
+            color: #750014; /* accent color */
+        }
+
+        h1 {
+            font-weight: 300;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 48px;
+        }
+
+        h2 {
+            font-weight: 300;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 32px;
+        }
+
+        h3 {
+            font-weight: 300;
+            font-size: 24px;
+        }
+
+        h4 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .text-small {
+            font-size: 17px;
+        }
+
+        .text-large {
+            font-size: 24px;
+        }
+
+        .text-title {
+            font-size: 40px;
+            font-weight: 700;
+            font-variant: small-caps;
+            font-family: 'Asap', roboto, sans-serif;
+            color: #750014; /* accent color */
+        }
+
+        .sm-name {
+            font-variant: small-caps;
+            font-family: 'Asap', roboto, sans-serif;
+            color: #750014; /* accent color */
+            font-weight: 700;
+        }
+
+        .text-toplink {
+            font-weight: 400;
+        }
+
+        .list-inline,
+        .list-inline a,
+        .list-inline a:focus,
+        .list-inline a:hover {
+            color: #8b959e; /* author names */
+        }
+
+        .team-grid,
+        .team-grid a,
+        .team-grid a:focus,
+        .team-grid a:hover {
+            color: #666666;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .hero-link,
+        .hero-link:focus {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 13px;
+            border: 1px solid #750014;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.82em;
+            font-weight: 500;
+            line-height: 1.2;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-link:hover {
+            background: #750014;
+            color: #ffffff;
+            border-color: #750014;
+            text-decoration: none;
+        }
+
+        .teleop-showcase {
+            margin: 1.2em 0 1.6em;
+        }
+
+        .teleop-label {
+            font-size: 0.76em;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            color: #666666;
+            text-transform: uppercase;
+            margin-bottom: 0.45em;
+        }
+
+        .teleop-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .teleop-grid-three {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .teleop-card {
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .teleop-card img,
+        .teleop-card video {
+            width: 100%;
+            display: block;
+            background: transparent;
+        }
+
+        .teleop-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 150px;
+            background: linear-gradient(135deg, #f4eaea 0%, #e6cfcf 100%);
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            opacity: 0.9;
+            text-align: center;
+            padding: 0 8px;
+        }
+
+        .teleop-caption {
+            font-size: 0.72em;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            color: #666666;
+            padding: 7px 10px;
+            border-top: 1px solid #ececec;
+            text-transform: uppercase;
+        }
+
+        .rollout-split-label {
+            display: flex;
+            font-size: 0.55em;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: #ffffff;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .rollout-split-label > span {
+            flex: 1 1 0;
+            padding: 3px 6px;
+            text-align: center;
+        }
+
+        .rollout-split-label > span + span {
+            border-left: 1px solid #ececec;
+        }
+
+        .rollout-split-label .gen-label,
+        .rollout-split-label .gt-label {
+            color: #7a7a7a;
+        }
+
+        .rollout-video-wrap {
+            position: relative;
+            line-height: 0;
+            overflow: hidden;
+        }
+
+        .rollout-video-wrap > video {
+            display: block;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .rollout-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .rollout-overlay::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 90px;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.45) 40%,
+                rgba(0, 0, 0, 0.18) 75%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            opacity: 0;
+            transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+
+        .rollout-overlay::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 20px;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.22) 0%,
+                rgba(0, 0, 0, 0.06) 65%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            pointer-events: none;
+            transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .rollout-video-wrap:hover .rollout-overlay::before,
+        .rollout-overlay.is-scrub::before {
+            opacity: 1;
+        }
+
+        .rollout-video-wrap:hover .rollout-overlay::after {
+            opacity: 0;
+        }
+
+        .rollout-track {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 24px;
+            cursor: pointer;
+            pointer-events: auto;
+            touch-action: none;
+        }
+
+        .rollout-range {
+            appearance: none;
+            -webkit-appearance: none;
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            opacity: 0;
+            cursor: pointer;
+            pointer-events: auto;
+            touch-action: none;
+        }
+
+        .rollout-range::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 24px;
+            background: transparent;
+            border: 0;
+        }
+
+        .rollout-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: 0;
+        }
+
+        .rollout-range::-moz-range-track {
+            width: 100%;
+            height: 24px;
+            background: transparent;
+            border: 0;
+        }
+
+        .rollout-range::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: 0;
+        }
+
+        .rollout-track::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 6px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.32);
+        }
+
+        .rollout-fill {
+            position: absolute;
+            left: 0;
+            bottom: 6px;
+            width: 0;
+            height: 3px;
+            background: #faf7f0;
+            transition: width 260ms linear;
+            pointer-events: none;
+        }
+
+        .rollout-overlay.is-scrub .rollout-fill {
+            transition: none;
+        }
+
+        .rollout-knob {
+            position: absolute;
+            left: 0;
+            bottom: 6.75px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #faf7f0;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9),
+                        0 1px 3px rgba(0, 0, 0, 0.35);
+            transform: translate(-50%, 50%) scale(0);
+            transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+                        left 260ms linear;
+            pointer-events: none;
+        }
+
+        .rollout-video-wrap:hover .rollout-knob,
+        .rollout-overlay.is-scrub .rollout-knob {
+            transform: translate(-50%, 50%) scale(1);
+        }
+
+        .rollout-overlay.is-scrub .rollout-knob {
+            transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .rollout-time {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            padding: 5px 10px;
+            background: rgba(26, 22, 18, 0.55);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            backdrop-filter: blur(10px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            color: #faf7f0;
+            font-family: "Source Code Pro", ui-monospace, monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.01em;
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+            line-height: 1;
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(26, 22, 18, 0.18);
+            white-space: nowrap;
+        }
+
+        .rollout-time-sep { opacity: 0.45; }
+        .rollout-time-tot { opacity: 0.72; }
+
+        .rollout-pill {
+            position: absolute;
+            right: 10px;
+            bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            padding: 3px 4px;
+            background: rgba(26, 22, 18, 0.55);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            backdrop-filter: blur(10px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            opacity: 0;
+            transform: translateY(3px);
+            transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(26, 22, 18, 0.18);
+        }
+
+        .rollout-video-wrap:hover .rollout-pill,
+        .rollout-overlay.is-scrub .rollout-pill {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .rollout-btn {
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #faf7f0;
+            cursor: pointer;
+            border-radius: 999px;
+            transition: background 140ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .rollout-btn:hover { background: rgba(255, 255, 255, 0.16); }
+        .rollout-btn:active { background: rgba(255, 255, 255, 0.24); }
+        .rollout-btn svg {
+            width: 12px;
+            height: 12px;
+            display: block;
+        }
+
+        @media (hover: none) {
+            .rollout-pill {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+            .rollout-overlay::before { opacity: 1; }
+            .rollout-knob { transform: translate(-50%, 50%) scale(1); }
+        }
+
+        @media screen and (max-width: 767px) {
+            .teleop-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .text-caption {
+            font-size: 20px;
+            display: block;
+        }
+
+        .text-caption-xs {
+            font-size: 16px;
+            display: block;
+        }
+
+        .text-caption-small {
+            font-size: 16px;
+            color: #777777;
+            display: block;
+        }
+
+        .text-equation {
+            font-size: 110%;
+        }
+
+        .text-red {
+            color: #f54254;
+        }
+
+        .text-blue {
+            color: #598be7;
+        }
+
+        .text-tt {
+            font-family: "Source Code Pro", "Lato", Verdana, Helvetica, sans-serif;
+            font-weight: 400;
+        }
+
+        .codebox-pre {
+            background: #f7f4f4;
+            border: 1px solid #e8dede;
+            border-radius: 6px;
+            padding: 14px 16px;
+            font-family: "Source Code Pro", monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+            color: #333;
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin: 0.6em 0 0.2em;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        /* ===== Abstract ===== */
+        .abstract-block {
+            margin-bottom: 10px;
+        }
+        .abstract-block > p {
+            margin: 0;
+        }
+
+        /* ===== Section divider line ===== */
+        .section-line {
+            border: none;
+            border-top: 1px solid #e2d6d6;
+            margin: 22px 0 22px;
+        }
+
+        /* ===== Policy figure ===== */
+        .policy-figure {
+            margin: 24px auto;
+            max-width: 920px;
+        }
+
+        /* ===== Experiment videos ===== */
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .experiment-item {
+            margin: 0;
+        }
+        .experiment-video {
+            display: block;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border-radius: 8px;
+            background: #000;
+            object-fit: cover;
+        }
+        .real-results-title {
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        .real-results-wrap {
+            margin: 16px 0 22px;
+            overflow: hidden;
+            border: 1px solid #e8dede;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .real-results-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            color: #333333;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+        .real-results-table caption {
+            padding: 10px 12px;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+            caption-side: top;
+            background: #fbf8f8;
+            border-bottom: 1px solid #e8dede;
+        }
+        .real-results-table th,
+        .real-results-table td {
+            padding: 6px 5px;
+            border-bottom: 1px solid #eeeeee;
+            border-right: 1px solid #eeeeee;
+            vertical-align: middle;
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+        .real-results-table th:nth-child(1),
+        .real-results-table td:nth-child(1) {
+            width: 13%;
+        }
+        .real-results-table th:nth-child(2),
+        .real-results-table td:nth-child(2) {
+            width: 12%;
+        }
+        .real-results-table th:nth-child(n+3),
+        .real-results-table td:nth-child(n+3) {
+            width: 12.5%;
+        }
+        .real-results-table th:last-child,
+        .real-results-table td:last-child {
+            border-right: 0;
+        }
+        .real-results-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+        .real-results-table thead th {
+            color: #666666;
+            background: #fafafa;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: normal;
+        }
+        .real-results-table .task-cell {
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: left;
+            white-space: normal;
+        }
+        .real-results-table .metric-cell {
+            color: #666666;
+            font-size: 11px;
+            text-align: left;
+            white-space: normal;
+        }
+        .real-results-table .result-cell {
+            font-family: "Source Code Pro", monospace;
+            font-size: 13px;
+            font-variant-numeric: tabular-nums;
+        }
+        .real-results-table .metric-cell span,
+        .real-results-table .result-cell span {
+            display: block;
+        }
+        .real-results-table .metric-cell span + span,
+        .real-results-table .result-cell span + span {
+            margin-top: 3px;
+        }
+        .real-results-table .bsp-cell {
+            background: #fbf7f7;
+        }
+        .real-results-table .metric-highlight {
+            color: #750014;
+            font-weight: 700;
+        }
+        .real-results-analysis {
+            margin: 8px 0 0;
+            color: #555555;
+            font-size: 0.96em;
+        }
+        /* ===== Combined real-world results (wide, scrollable) ===== */
+        .real-results-scroll {
+            margin: 16px 0 22px;
+            overflow-x: auto;
+            border: 1px solid #e8dede;
+            border-radius: 8px;
+            background: #ffffff;
+            -webkit-overflow-scrolling: touch;
+        }
+        .real-results-full {
+            border-collapse: collapse;
+            min-width: 940px;
+            width: 100%;
+            color: #333333;
+            font-variant-numeric: tabular-nums;
+        }
+        .real-results-full caption {
+            padding: 10px 12px;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+            caption-side: top;
+            background: #fbf8f8;
+            border-bottom: 1px solid #e8dede;
+        }
+        .real-results-full th,
+        .real-results-full td {
+            padding: 5px 6px;
+            border-bottom: 1px solid #eeeeee;
+            border-right: 1px solid #eeeeee;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        .real-results-full thead th {
+            color: #555555;
+            background: #ffffff;
+            font-family: 'Asap', roboto, sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        .real-results-full tbody tr:last-child td {
+            border-bottom: 0;
+        }
+        .real-results-full .task-cell {
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-weight: 600;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .real-results-full .metric-cell {
+            color: #666666;
+            text-align: left;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+        .real-results-full .metric-cell span,
+        .real-results-full .result-cell span {
+            display: block;
+        }
+        .real-results-full .metric-cell span + span,
+        .real-results-full .result-cell span + span {
+            margin-top: 3px;
+        }
+        .real-results-full .result-cell {
+            font-family: "Source Code Pro", monospace;
+            font-size: 12px;
+        }
+        .real-results-full .bsp-col {
+            background: #fbf7f7;
+        }
+        .real-results-full .group-end {
+            border-right: 2px solid #e0cccc;
+        }
+        .sr-win,
+        .time-win {
+            border-radius: 4px;
+            padding: 1px 4px;
+            font-weight: 700;
+            color: #333333;
+        }
+        .sr-win { background: #E6F2FF; }
+        .time-win { background: #F2E6FF; }
+        .real-results-caption {
+            margin: 0 0 14px;
+            color: #555555;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .real-results-legend {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 4px 14px;
+            margin-left: 4px;
+        }
+        .real-results-legend .sr-win,
+        .real-results-legend .time-win {
+            font-family: "Source Code Pro", monospace;
+        }
+        .real-results-findings {
+            margin: 8px 0 0;
+            padding-left: 0;
+            list-style: none;
+            color: #333333;
+            font-size: 0.96em;
+        }
+        .real-results-findings li {
+            margin-bottom: 6px;
+        }
+        .real-results-findings b {
+            color: #750014;
+            font-weight: 600;
+        }
+        .real-results-figure-item {
+            margin: 12px 0 10px;
+            list-style: none;
+        }
+        .real-results-figure {
+            margin: 0;
+        }
+        .real-results-figure img,
+        .real-results-figure video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #e8dede;
+            border-radius: 6px;
+            background: #ffffff;
+        }
+        .real-results-figure-narrow img {
+            max-width: 520px;
+        }
+        .real-results-figure figcaption {
+            margin-top: 6px;
+            color: #666666;
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+        .real-results-split-finding {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(180px, 0.8fr);
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .real-results-findings li.real-results-split-finding {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .real-results-split-finding p {
+            margin: 0;
+        }
+        .real-results-split-finding .real-results-figure {
+            margin: 0;
+            align-self: start;
+            margin-top: 24px;
+        }
+        .real-results-split-finding img,
+        .real-results-split-finding video {
+            width: 100%;
+            max-width: 240px;
+        }
+        @media screen and (max-width: 640px) {
+            .real-results-table {
+                font-size: 11px;
+                line-height: 1.15;
+            }
+            .real-results-table caption {
+                font-size: 13px;
+                padding: 8px 10px;
+            }
+            .real-results-table th,
+            .real-results-table td {
+                padding: 5px 3px;
+            }
+            .real-results-table thead th,
+            .real-results-table .task-cell {
+                font-size: 9px;
+            }
+            .real-results-table .metric-cell,
+            .real-results-table .result-cell {
+                font-size: 10px;
+            }
+            .real-results-split-finding {
+                grid-template-columns: 1fr;
+            }
+        }
+        .real-video-title {
+            margin-top: 30px;
+            margin-bottom: 8px;
+        }
+        .real-video-intro {
+            margin-bottom: 18px;
+            color: #555555;
+            font-size: 0.96em;
+        }
+        .real-video-comparisons {
+            position: relative;
+            width: 100%;
+        }
+        .real-video-task {
+            margin: 22px 0 28px;
+            padding-top: 16px;
+            border-top: 1px solid #e8dede;
+        }
+        .real-video-comparisons > .real-video-task:first-child {
+            padding-top: 0;
+            border-top: none;
+        }
+        .real-video-task h4 {
+            margin: 0;
+            font-size: 20px;
+            color: #750014;
+            font-weight: 600;
+        }
+        .real-video-head {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px 14px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .real-video-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .real-video-hint {
+            position: absolute;
+            left: calc(100% + 16px);
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .real-video-hint svg {
+            width: 30px;
+            height: 14px;
+            animation: real-video-hint-nudge 1.1s ease-in-out infinite;
+        }
+        @keyframes real-video-hint-nudge {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-6px); }
+        }
+        @media (max-width: 1380px) {
+            .real-video-hint { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .real-video-hint svg { animation: none; }
+        }
+        .real-video-control {
+            appearance: none;
+            -webkit-appearance: none;
+            padding: 5px 10px;
+            border: 1px solid #750014;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+        .real-video-control:hover,
+        .real-video-control:focus {
+            background: #750014;
+            color: #ffffff;
+            outline: none;
+        }
+        .real-video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0;
+        }
+        .real-video-grid + .real-video-grid {
+            margin-top: 0;
+        }
+        .real-video-cell {
+            overflow: hidden;
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            background: #ffffff;
+        }
+        .real-video-grid .real-video-cell + .real-video-cell {
+            margin-left: -1px;
+        }
+        .real-video-grid .real-video-cell:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        .real-video-grid .real-video-cell:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .real-video-media {
+            position: relative;
+            background: #ffffff;
+        }
+        .real-video-media video {
+            display: block;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            background: #ffffff;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .real-video-speed {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            z-index: 2;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            line-height: 1.2;
+            pointer-events: none;
+        }
+        .real-video-timer {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            z-index: 2;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: rgba(117, 0, 20, 0.9);
+            color: #ffffff;
+            font-family: "Source Code Pro", monospace;
+            font-size: 0.72em;
+            line-height: 1.2;
+            pointer-events: none;
+        }
+        .real-video-done {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(26, 22, 18, 0.42);
+            color: #ffffff;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 1em;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
+        }
+        .real-video-media.is-done .real-video-done {
+            opacity: 1;
+            visibility: visible;
+        }
+        .real-video-done::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center / contain;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center / contain;
+        }
+        .real-video-play {
+            appearance: none;
+            -webkit-appearance: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border: 1px solid rgba(117, 0, 20, 0.35);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #750014;
+            cursor: pointer;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.96);
+            transition: opacity 140ms ease, transform 140ms ease, background-color 140ms ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+        }
+        .real-video-media:hover .real-video-play,
+        .real-video-play:focus {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .real-video-play:hover,
+        .real-video-play:focus {
+            background: #ffffff;
+            outline: none;
+        }
+        .real-video-play::before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            margin-left: 3px;
+            border-top: 9px solid transparent;
+            border-bottom: 9px solid transparent;
+            border-left: 14px solid currentColor;
+        }
+        .real-video-play.is-playing::before {
+            width: 14px;
+            height: 16px;
+            margin-left: 0;
+            border-top: 0;
+            border-bottom: 0;
+            border-left: 5px solid currentColor;
+            border-right: 5px solid currentColor;
+        }
+        .real-video-cell span {
+            display: block;
+            padding: 7px 9px;
+            border-top: 1px solid #ececec;
+            font-family: 'Asap', roboto, sans-serif;
+            color: #333;
+            font-weight: 400;
+            font-size: 0.85em;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .sim-results-title {
+            margin-top: 34px;
+            margin-bottom: 8px;
+        }
+        .sim-results-intro,
+        .sim-results-note {
+            color: #333333;
+            font-size: 0.96em;
+        }
+        .sim-result-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 3px;
+            margin: 18px 0 12px;
+        }
+        .sim-result-card {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .sim-result-card h4 {
+            margin: 0;
+            padding: 6px 4px;
+            border-bottom: 1px solid #ececec;
+            color: #750014;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.15;
+            text-align: center;
+            white-space: normal;
+        }
+        .sim-result-card .real-video-media video {
+            aspect-ratio: 16 / 9;
+        }
+        .sim-result-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+        .sim-result-table th,
+        .sim-result-table td {
+            padding: 5px 3px;
+            border-top: 1px solid #eeeeee;
+            border-right: 1px solid #eeeeee;
+            text-align: center;
+            overflow-wrap: anywhere;
+            white-space: normal;
+        }
+        .sim-result-table td {
+            font-size: 13px;
+        }
+        .sim-result-table th:last-child,
+        .sim-result-table td:last-child {
+            border-right: 0;
+        }
+        .sim-result-table thead th {
+            color: #666666;
+            background: #fafafa;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .sim-result-table tbody th {
+            color: #666666;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .sim-result-table .success-highlight {
+            color: #750014;
+            font-weight: 700;
+        }
+        .pusht-speedup-panel {
+            margin: 18px 0 12px;
+            border: 1px solid #e8dede;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        .pusht-speedup-panel h4 {
+            margin: 0;
+            padding: 10px 12px;
+            border-bottom: 1px solid #e8dede;
+            color: #750014;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .pusht-speedup-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+        .pusht-speedup-table th,
+        .pusht-speedup-table td {
+            padding: 8px 7px;
+            border-right: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+            color: #333333;
+            font-size: 13px;
+            line-height: 1.2;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .pusht-speedup-table th:last-child,
+        .pusht-speedup-table td:last-child {
+            border-right: 0;
+        }
+        .pusht-speedup-table tbody tr:last-child th,
+        .pusht-speedup-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+        .pusht-speedup-table thead th {
+            color: #666666;
+            background: #fafafa;
+            font-weight: 600;
+        }
+        .pusht-speedup-table tbody th {
+            color: #750014;
+            font-weight: 600;
+        }
+        .pusht-speedup-table .bsp-cell {
+            background: #fbf7f7;
+            color: #750014;
+            font-weight: 700;
+        }
+        .pusht-speedup-summary {
+            margin: 0;
+            padding: 10px 12px;
+            border-top: 1px solid #e8dede;
+            color: #555555;
+            font-size: 0.96em;
+            line-height: 1.35;
+        }
+        .experiment-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            border-radius: 8px;
+            background: #f5f5f5;
+            border: 1px dashed #d9d9d9;
+            color: #aaa;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        @media (max-width: 700px) {
+            .experiment-grid { grid-template-columns: 1fr; }
+            .real-video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sim-result-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 6px;
+            }
+            .sim-result-card h4 { font-size: 15px; }
+            .sim-result-table,
+            .sim-result-table td { font-size: 13px; }
+            .sim-result-table thead th,
+            .sim-result-table tbody th { font-size: 12px; }
+            .pusht-speedup-table th,
+            .pusht-speedup-table td { font-size: 11px; }
+        }
+        @media (max-width: 480px) {
+            .real-video-grid { grid-template-columns: 1fr; }
+            .sim-result-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 3px;
+            }
+            .sim-result-card h4 { font-size: 14px; }
+            .sim-result-table,
+            .sim-result-table td { font-size: 12px; }
+            .sim-result-table thead th,
+            .sim-result-table tbody th { font-size: 11px; }
+            .pusht-speedup-table th,
+            .pusht-speedup-table td {
+                padding: 6px 4px;
+                font-size: 10px;
+            }
+        }
+
+        .header-links a,
+        .header-links a:focus {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 16px;
+            border: 1px solid #750014;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.82em;
+            font-weight: 500;
+            line-height: 1.2;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .header-links a:hover {
+            background: #750014;
+            color: #ffffff;
+            border-color: #750014;
+            text-decoration: none;
+        }
+
+        .team-grid li { font-size: 0.95em; }
+
+        .top0 { margin-top: 0px; }
+        .top5 { margin-top: 5px; }
+        .top10 { margin-top: 10px; }
+        .top15 { margin-top: 15px; }
+        .top20 { margin-top: 20px; }
+        .top30 { margin-top: 30px; }
+        .bottom0 { margin-bottom: 0px; }
+        .bottom10 { margin-bottom: 10px; }
+        .bottom15 { margin-bottom: 15px; }
+        .bottom20 { margin-bottom: 20px; }
+        .bottom30 { margin-bottom: 30px; }
+
+        @media screen and (min-width: 992px) {
+            .mobile-only { display: none; }
+        }
+
+        @media screen and (max-width: 991px) {
+            .desktop-only { display: none; }
+            .text-equation { font-size: 100%; }
+        }
+
+        @media screen and (min-width: 992px) {
+            body, td, th, tr, p, a {
+                font-family: 'Asap', roboto, sans-serif;
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width: 991px) {
+            body, td, th, tr, p, a {
+                font-family: 'Asap', roboto, sans-serif;
+                font-size: 19px;
+            }
+            .text-title { font-size: 44px; }
+            h1 { font-size: 40px; }
+        }
+
+        /* ===== B_Spline_Intro (bspline-prefixed, isolated) ===== */
+        .bspline-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px 28px;
+            align-items: start;
+        }
+        .bspline-copy p {
+            margin-bottom: 0;
+            font-size: 18px;
+            line-height: 1.42;
+        }
+        .bspline-figure {
+            position: relative;
+            margin: 0;
+            min-width: 0;
+        }
+        .bspline-toolbar {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 8px 12px;
+            flex-wrap: wrap;
+            margin: 6px 0 4px;
+        }
+        .bspline-toolbar-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+        .bspline-status {
+            font-family: "Source Code Pro", monospace;
+            font-size: 13px;
+            color: #777777;
+        }
+        .bspline-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .bspline-caption-inline {
+            margin: 0;
+            font-size: 13px;
+            color: #777777;
+            text-align: right;
+        }
+        .bspline-caption-hint {
+            position: absolute;
+            left: calc(100% + 16px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+            color: #777777;
+            pointer-events: none;
+        }
+        .bspline-caption-hint .bspline-hint-left {
+            flex: 0 0 auto;
+            width: 30px;
+            height: 14px;
+            color: #750014;
+            animation: real-video-hint-nudge 1.1s ease-in-out infinite;
+        }
+        @media (max-width: 1380px) {
+            .bspline-caption-hint { display: none; }
+        }
+        .hero-video-wrap {
+            position: relative;
+        }
+        .hero-replay-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 1px solid #750014;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #750014;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .hero-replay-btn:hover {
+            background: #750014;
+            color: #ffffff;
+        }
+        .hero-replay-btn {
+            margin-left: 38px;
+        }
+        .hero-replay-btn svg {
+            flex: 0 0 auto;
+        }
+        .hero-video-side {
+            position: absolute;
+            left: calc(100% + 16px);
+            top: 50%;
+            transform: translateY(-50%);
+            width: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .hero-video-caption {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+            font-size: 0.85em;
+            color: #777777;
+            font-style: italic;
+            pointer-events: none;
+        }
+        .hero-video-caption svg {
+            flex: 0 0 auto;
+            width: 30px;
+            height: 14px;
+            color: #750014;
+            animation: real-video-hint-nudge 1.1s ease-in-out infinite;
+        }
+        .hero-video-timer {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            z-index: 2;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: rgba(117, 0, 20, 0.9);
+            color: #ffffff;
+            font-family: "Source Code Pro", monospace;
+            font-size: 0.72em;
+            line-height: 1.2;
+            pointer-events: none;
+        }
+        @media (max-width: 1380px) {
+            .hero-video-side {
+                position: static;
+                width: auto;
+                transform: none;
+                margin-top: 8px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+            }
+            .hero-replay-btn {
+                margin-left: 0;
+            }
+        }
+        .bspline-knot-arrow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            color: #750014;
+            pointer-events: none;
+        }
+        .bspline-knot-arrow path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        @media (max-width: 1380px) {
+            .bspline-knot-arrow { display: none; }
+        }
+        .bspline-play,
+        .bspline-reset {
+            appearance: none;
+            -webkit-appearance: none;
+            padding: 5px 10px;
+            border: 1px solid #750014;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #750014;
+            font-family: 'Asap', roboto, sans-serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+        .bspline-reset:hover,
+        .bspline-reset:focus,
+        .bspline-play:hover,
+        .bspline-play:focus {
+            background: #750014;
+            color: #ffffff;
+            outline: none;
+        }
+        .bspline-play.is-playing {
+            background: #750014;
+            color: #ffffff;
+        }
+        .bspline-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #ffffff;
+            overflow: visible;
+            touch-action: none;
+            user-select: none;
+        }
+        .bspline-grid line {
+            stroke: #ece3e3;
+            stroke-width: 1;
+        }
+        .bspline-control-poly {
+            fill: none;
+            stroke: #cbbf9f;
+            stroke-width: 1.6;
+            stroke-dasharray: 6 5;
+        }
+        .bspline-curve {
+            fill: none;
+            stroke: #750014;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .bspline-control-point {
+            fill: rgb(238, 200, 176);
+            stroke: #ffffff;
+            stroke-width: 1.8;
+            cursor: grab;
+        }
+        .bspline-hit-target {
+            fill: transparent;
+            stroke: transparent;
+            pointer-events: all;
+            cursor: grab;
+        }
+        .bspline-hit-target.bspline-knot-hit { cursor: ew-resize; }
+        .bspline-control-point.is-dragging,
+        .bspline-knot.is-dragging { cursor: grabbing; }
+        .bspline-knot-rail {
+            stroke: #cfcfcf;
+            stroke-width: 2;
+        }
+        .bspline-knot-end {
+            fill: rgb(255, 181, 70);
+        }
+        .bspline-knot {
+            fill: rgb(255, 181, 70);
+            stroke: #ffffff;
+            stroke-width: 1.8;
+            cursor: ew-resize;
+        }
+        .bspline-knot-label {
+            font-family: "Source Code Pro", monospace;
+            font-size: 10px;
+            fill: #777777;
+            text-anchor: middle;
+            paint-order: stroke;
+            stroke: #ffffff;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+        }
+        .bspline-label {
+            font-family: "Source Code Pro", monospace;
+            font-size: 12px;
+            fill: #777777;
+            paint-order: stroke;
+            stroke: #ffffff;
+            stroke-width: 5px;
+            stroke-linejoin: round;
+        }
+        @media (min-width: 768px) {
+            #bspline-section h2 { margin-bottom: 12px; }
+        }
+
+        /* ===== Fitting_Diagram (fit-prefixed, isolated) ===== */
+        .fit-figure { margin: 0; }
+        .fit-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px 24px;
+            flex-wrap: wrap;
+        }
+        .fit-header h2 { margin: 0; }
+        .fit-toolbar {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 280px;
+            align-items: start;
+            gap: 16px;
+        }
+        .fit-status { min-width: 0; }
+        .fit-overlay {
+            width: 100%;
+            margin-top: 16px;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+        .fit-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #ffffff;
+            overflow: visible;
+        }
+        .fit-axis line { stroke: #ece3e3; stroke-width: 1; }
+
+        /* Optional residual stems (data -> prediction) */
+        .fit-residual line { stroke: #c9bcbc; stroke-width: 1; }
+
+        /* Optional control polygon */
+        .fit-control polyline {
+            fill: none;
+            stroke: rgb(238, 200, 176);
+            stroke-width: 1.5;
+            stroke-dasharray: 5 5;
+            opacity: 0.9;
+        }
+        .fit-control circle { fill: rgb(238, 200, 176); stroke: #ffffff; stroke-width: 1.8; }
+
+        .fit-curve {
+            stroke: #750014;     /* primary themed element */
+            stroke-width: 2.5;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        .fit-points circle { fill: rgb(64, 99, 150); }
+
+        .fit-knot-rail {
+            stroke: #cfcfcf;
+            stroke-width: 2;
+        }
+        .fit-knots polygon {
+            fill: rgb(255, 181, 70);
+            stroke: #ffffff;
+            stroke-width: 1.5;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+        .fit-knots .fit-knot-pop {        /* knot insertion "pop" */
+            animation: fit-pop 520ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes fit-pop {
+            0%   { transform: scale(0);   opacity: 0; }
+            60%  { transform: scale(1.6); opacity: 1; }
+            100% { transform: scale(1);   opacity: 1; }
+        }
+
+        .fit-worst circle {
+            fill: none;
+            stroke: #f54254;              /* .text-red accent */
+            stroke-width: 2;
+        }
+        .fit-worst line { stroke: #f54254; stroke-width: 1.5; }
+
+        .fit-status {
+            font-family: "Source Code Pro", monospace;
+            font-size: 13px;
+            color: #777777;
+            margin: 0;
+        }
+        .fit-status span + span::before { content: " \00b7 "; }
+        .fit-threshold-label { font-weight: 400; }
+
+        .fit-empty {
+            font-family: "Source Code Pro", monospace;
+            font-size: 13px;
+            color: #777777;
+            padding: 16px 0;
+        }
+
+        /* Threshold_Control */
+        .fit-control-block { margin-top: 10px; }
+        .fit-control-title {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 11px;
+            color: #777777;
+            margin-bottom: 4px;
+        }
+        .fit-slider { width: 100%; accent-color: #750014; }  /* accent track/thumb */
+        .fit-scale {
+            display: flex;
+            justify-content: space-between;
+            font-family: "Source Code Pro", monospace;
+            font-size: 10px;
+            color: #999999;
+            margin-top: 2px;
+        }
+        .fit-scale span { cursor: pointer; }
+        .fit-scale span.fit-scale-active { color: #750014; font-weight: 700; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fit-knots .fit-knot-pop { animation: none; }
+        }
+        @media (max-width: 600px) {
+            .fit-toolbar { grid-template-columns: 1fr; }
+            .fit-overlay { width: 100%; }
+        }
+    </style>
+
+    <title>B-spline Policy</title>
+
+    <meta name="author" content="Anonymous Authors">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="B-spline Policy: Accelerating Manipulation Policies via B-spline Action Representations">
+
+    <base target="_blank">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body style="zoom: 1.15;">
+    <nav class="page-toc" aria-label="Page sections">
+        <div class="page-toc-title">Contents</div>
+        <ul>
+            <li><a href="#dataset" target="_self">Motivation</a></li>
+            <li><a href="#what-are-b-splines" target="_self">What are B-splines?</a></li>
+            <li><a href="#adaptive-fitting" target="_self">Fitting a B-spline</a></li>
+            <li><a href="#bspline-policy" target="_self">B-spline Policy</a></li>
+            <li><a href="#experiments" target="_self">Experiments</a></li>
+            <li class="toc-sub"><a href="#real-video-details" target="_self">Video Comparisons</a></li>
+            <li class="toc-sub"><a href="#real-world-results" target="_self">Real-World Results</a></li>
+            <li class="toc-sub"><a href="#simulation" target="_self">Simulation Benchmarks</a></li>
+            <li><a href="#acknowledgements" target="_self">Acknowledgements</a></li>
+        </ul>
+    </nav>
+    <div class="container" id="main">
+        <div style="background: #ffffff; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding-bottom: 28px;">
+        <div class="container">
+        <div class="row" style="margin-top: 80px; text-align: center;">
+            <div class="col-md-12">
+                <div class="text-large" style="color: #750014; font-size: 35px; line-height: 1.3; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+                    <b style="font-size: 60px;">B-spline Policy</b><br>
+                    <span id="subtitle-line" style="white-space: nowrap;">Accelerating Manipulation Policies via B-spline Action Representations</span>
+                </div>
+                <ul class="list-inline authors" style="margin-top: 16px; margin-bottom: 0;">
+                    <li>Anonymous Authors</li>
+                </ul>
+                <div style="margin-top: 16px; margin-bottom: 28px; font-size: 0.9em; color: #626a73; line-height: 1.5;">
+                    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 28px;">
+                        <span>Anonymous submission</span>
+                    </div>
+                </div>
+                <div class="header-links" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 8px; margin-bottom: 0px;">
+                    <a href="#bspline-policy" target="_self">Method</a>
+                    <a href="#experiments" target="_self">Experiments</a>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="row" style="margin-top: 0px;">
+            <div class="col-md-12">
+                <p style="margin-bottom: 12px; text-align: center;">
+                    <span style="color: #750014; font-weight: 700;">TL;DR:</span>
+                    Replace discrete action chunks with B-spline curves,
+                    for faster visuomotor policy.
+                </p>
+                <div class="hero-video-wrap">
+                    <div class="real-video-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+                        <figure class="real-video-cell">
+                            <div class="real-video-media">
+                                <video id="hero-demo-dp" src="assets/dp.mp4" autoplay muted playsinline preload="auto"></video>
+                                <div class="hero-video-timer" data-hero-timer-for="hero-demo-dp">0.00s</div>
+                            </div>
+                            <span>Diffusion Policy</span>
+                        </figure>
+                        <figure class="real-video-cell">
+                            <div class="real-video-media">
+                                <video id="hero-demo-bsp" src="assets/bsp_fast.mp4" autoplay muted playsinline preload="auto"></video>
+                                <div class="hero-video-timer" data-hero-timer-for="hero-demo-bsp">0.00s</div>
+                            </div>
+                            <span>B-spline Policy</span>
+                        </figure>
+                    </div>
+                    <div class="hero-video-side">
+                        <button type="button" id="hero-demo-replay" class="hero-replay-btn">
+                            <span>Replay</span>
+                        </button>
+                        <p class="hero-video-caption">
+                            <svg viewBox="0 0 30 14" fill="none" aria-hidden="true">
+                                <path d="M3 7h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Real-time raw videos.</span>
+                        </p>
+                    </div>
+                </div>
+                <script>
+                    (function () {
+                        var ids = ['hero-demo-dp', 'hero-demo-bsp'];
+                        var timerRafs = {};
+                        function formatSeconds(t) {
+                            if (!isFinite(t) || t < 0) return '0.00s';
+                            return t.toFixed(2) + 's';
+                        }
+                        function updateTimer(id) {
+                            var v = document.getElementById(id);
+                            var timer = document.querySelector('[data-hero-timer-for="' + id + '"]');
+                            if (!v || !timer) return;
+                            timer.textContent = formatSeconds(v.currentTime || 0);
+                        }
+                        function stopTimerLoop(id) {
+                            if (timerRafs[id] && typeof cancelAnimationFrame === 'function') {
+                                cancelAnimationFrame(timerRafs[id]);
+                            }
+                            timerRafs[id] = null;
+                        }
+                        function startTimerLoop(id) {
+                            var v = document.getElementById(id);
+                            if (!v) return;
+                            stopTimerLoop(id);
+                            if (typeof requestAnimationFrame !== 'function') {
+                                updateTimer(id);
+                                return;
+                            }
+                            function tick() {
+                                updateTimer(id);
+                                if (!v.paused && !v.ended) {
+                                    timerRafs[id] = requestAnimationFrame(tick);
+                                } else {
+                                    timerRafs[id] = null;
+                                }
+                            }
+                            timerRafs[id] = requestAnimationFrame(tick);
+                        }
+                        function bindTimer(id) {
+                            var v = document.getElementById(id);
+                            if (!v) return;
+                            ['loadedmetadata', 'seeked'].forEach(function (evt) {
+                                v.addEventListener(evt, function () { updateTimer(id); });
+                            });
+                            v.addEventListener('play', function () { startTimerLoop(id); });
+                            v.addEventListener('pause', function () {
+                                stopTimerLoop(id);
+                                updateTimer(id);
+                            });
+                            v.addEventListener('ended', function () {
+                                stopTimerLoop(id);
+                                updateTimer(id);
+                            });
+                            updateTimer(id);
+                        }
+                        function playAll() {
+                            ids.forEach(function (id) {
+                                var v = document.getElementById(id);
+                                if (!v) return;
+                                v.muted = true;
+                                v.play().catch(function () {});
+                            });
+                        }
+                        function replayAll() {
+                            ids.forEach(function (id) {
+                                var v = document.getElementById(id);
+                                if (!v) return;
+                                v.muted = true;
+                                v.currentTime = 0;
+                                updateTimer(id);
+                                v.play().catch(function () {});
+                            });
+                        }
+                        ids.forEach(bindTimer);
+                        playAll();
+                        var btn = document.getElementById('hero-demo-replay');
+                        if (btn) btn.addEventListener('click', replayAll);
+                    })();
+                </script>
+            </div>
+        </div>
+
+        <div class="row top20 bottom30">
+            <div class="col-md-12">
+                <div class="abstract-block">
+                    <p>
+                        <span style="color: #750014; font-weight: 700;">Abstract:</span>
+                        In this work, we present B-spline Policy (BSP), an action representation designed for accelerating robot manipulation policies. Instead of predicting fixed-rate action chunks, BSP parameterizes actions as continuous B-spline curves defined by a set of knots and control points. This representation yields smooth, time-continuous trajectories that can be temporally scaled and executed by low-level controllers at higher frequencies and speeds. We show that B-spline–parameterized actions can be seamlessly integrated into standard policy learning pipelines by directly predicting B-spline parameters. Experiments on simulated and real-world tasks demonstrate that BSP significantly reduces task completion time, achieving substantial improvements over baseline methods while maintaining strong success rates.
+                    </p>
+                </div>
+                <hr class="section-line">
+                <h2 id="dataset">Visuomotor policies were often slow</h2>
+                <p>
+
+                <span style="color: #750014; font-weight: 600;">Speed remains a bottleneck in visuomotor policies.</span>
+                <!-- Consider loading an object into a dishwasher: humans typically complete the task in a few seconds, whereas most of today's robotic systems require close to a minute. -->
+                              <!-- <p> -->
+
+                A key reason is action chunking: policies predict fixed-rate waypoints, treating every moment the same. Manipulation is not uniform: robots should move fast in free space and slow down near contact making. Simply speeding up these waypoints can make motion jerky, and hard to track.
+                <!-- Despite progress in visuomotor policy learning, robotic manipulation policy still remains slow at task execution. -->
+                <!-- Visuomotor polices were often slow.  -->
+                <!-- In everyday manipulation tasks such as folding a T-shirt, humans typically complete the task in roughly 10 seconds, whereas even state-of-the-art robotic systems often require close to a minute.  -->
+                <p>
+                
+                <!-- Action chunks are temporally uniform, treating all moments the same, even though some phases need precision and others could move quickly. Chunk boundaries also introduce discontinuities, making fast execution jerky and unstable. -->
+                <p>
+            To address these issues, we propose B-spline Policy. Instead of predicting fixed-rate waypoint chunks, it represents action trajectories as continuous B-spline curves.
+            At execution time, the continuous curves can be sampled at any desired control frequency and temporally rescaled to traverse the same trajectory in less time, enabling faster and smoother motion.
+
+                <!--
+                  Scrubbable video player (kept from the reference layout).
+                  To use it, replace a `.teleop-placeholder` with:
+                    <div class="rollout-video-wrap">
+                      <video class="rollout-video" muted loop playsinline preload="metadata">
+                        <!-- add a local MP4 source here when extending this demo -->
+                      </video>
+                    </div>
+                  and add the card's id to the `roots` list below.
+                -->
+                <script>
+                    (function () {
+                        const roots = ['rtsim-showcase']
+                            .map((id) => document.getElementById(id))
+                            .filter(Boolean);
+                        if (!roots.length) return;
+                        const SVG_PLAY  = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>';
+                        const SVG_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+                        const RANGE_MAX = 1000;
+
+                        function wireCard(card) {
+                            const wrap = card.querySelector('.rollout-video-wrap');
+                            const video = wrap && wrap.querySelector('.rollout-video');
+                            if (!wrap || !video) return;
+
+                            const overlay = document.createElement('div');
+                            overlay.className = 'rollout-overlay';
+
+                            const track = document.createElement('div');
+                            track.className = 'rollout-track';
+                            const fill = document.createElement('div');
+                            fill.className = 'rollout-fill';
+                            const knob = document.createElement('div');
+                            knob.className = 'rollout-knob';
+                            const range = document.createElement('input');
+                            range.className = 'rollout-range';
+                            range.type = 'range';
+                            range.min = '0';
+                            range.max = String(RANGE_MAX);
+                            range.step = '1';
+                            range.value = '0';
+                            range.setAttribute('aria-label', 'Seek');
+                            track.appendChild(fill);
+                            track.appendChild(knob);
+                            track.appendChild(range);
+
+                            const pill = document.createElement('div');
+                            pill.className = 'rollout-pill';
+                            const btnPlay = document.createElement('button');
+                            btnPlay.type = 'button';
+                            btnPlay.className = 'rollout-btn rollout-btn-play';
+                            btnPlay.setAttribute('aria-label', 'Play/Pause');
+                            btnPlay.innerHTML = SVG_PLAY;
+                            pill.appendChild(btnPlay);
+
+                            overlay.appendChild(track);
+                            overlay.appendChild(pill);
+                            wrap.appendChild(overlay);
+
+                            let scrubbing = false;
+                            let wasPlaying = false;
+
+                            function syncPlayIcon() {
+                                btnPlay.innerHTML = video.paused ? SVG_PLAY : SVG_PAUSE;
+                            }
+                            function syncFill() {
+                                if (scrubbing) return;
+                                const d = video.duration;
+                                if (!(d > 0)) {
+                                    fill.style.width = '0%';
+                                    knob.style.left = '0%';
+                                    return;
+                                }
+                                const pct = Math.max(0, Math.min(100, (video.currentTime / d) * 100));
+                                fill.style.width = pct + '%';
+                                knob.style.left = pct + '%';
+                                range.value = String(Math.round((pct / 100) * RANGE_MAX));
+                            }
+
+                            video.addEventListener('play', syncPlayIcon);
+                            video.addEventListener('pause', syncPlayIcon);
+                            video.addEventListener('timeupdate', syncFill);
+                            video.addEventListener('loadedmetadata', syncFill);
+                            video.addEventListener('durationchange', syncFill);
+                            video.addEventListener('click', togglePlay);
+                            btnPlay.addEventListener('click', (ev) => { ev.stopPropagation(); togglePlay(); });
+
+                            function togglePlay() {
+                                if (video.paused) video.play().catch(() => {}); else video.pause();
+                            }
+
+                            function rangePct() {
+                                const v = parseFloat(range.value);
+                                if (!(v >= 0)) return 0;
+                                return Math.max(0, Math.min(1, v / RANGE_MAX));
+                            }
+                            function renderPct(pct) {
+                                const s = (pct * 100) + '%';
+                                fill.style.width = s;
+                                knob.style.left = s;
+                                range.value = String(Math.round(pct * RANGE_MAX));
+                            }
+                            function seekToPct(pct) {
+                                const d = video.duration;
+                                if (!(d > 0)) return;
+                                const t = Math.min(pct * d, Math.max(0, d - 0.05));
+                                try { video.currentTime = t; } catch (e) {}
+                            }
+
+                            range.addEventListener('pointerdown', (ev) => {
+                                if (ev.button !== undefined && ev.button !== 0) return;
+                                scrubbing = true;
+                                wasPlaying = !video.paused;
+                                overlay.classList.add('is-scrub');
+                                if (wasPlaying) video.pause();
+                            });
+                            range.addEventListener('input', () => {
+                                const pct = rangePct();
+                                renderPct(pct);
+                                seekToPct(pct);
+                            });
+                            const endScrub = () => {
+                                if (!scrubbing) return;
+                                scrubbing = false;
+                                overlay.classList.remove('is-scrub');
+                                if (wasPlaying) video.play().catch(() => {});
+                            };
+                            range.addEventListener('pointerup', endScrub);
+                            range.addEventListener('pointercancel', endScrub);
+                            range.addEventListener('change', endScrub);
+
+                            syncPlayIcon();
+                            syncFill();
+                            video.play().catch(() => {});
+                        }
+
+                        roots.forEach((root) => root.querySelectorAll('.teleop-card').forEach(wireCard));
+                    })();
+                </script>
+
+            </div>
+        </div>
+
+        <div class="row top30 bottom30" id="bspline-section">
+            <div class="col-md-12">
+                <hr class="section-line">
+                <h2 id="what-are-b-splines">What are B-splines?</h2>
+                <div class="bspline-layout">
+                    <div class="bspline-copy">
+                        <p>
+                            A B-spline defines a <span style="color: #750014; font-weight: 600;">smooth curve</span> by a set of <span style="color: rgb(255, 181, 70); font-weight: 600;">knots</span> and <span style="color: rgb(238, 200, 176); font-weight: 600;">control points</span>. 
+                            Instead of drawing straight lines between waypoints, a B-spline creates a smooth path that follows their overall trend. Think of it like bending a flexible ruler near waypoints instead of connecting them with sharp corners.
+                            <br>
+                            <!-- The <span style="color: #750014; font-weight: 600;">red curve</span>
+                            is a cubic B-spline. <span style="color: #598be7; font-weight: 600;">Blue dots</span>
+                            are control points; <span style="color: #666666ff; font-weight: 600;">grey diamonds</span>
+                            are internal knots on the parameter axis.
+                            The endpoints are clamped.  -->
+
+                            <!-- B-spline Policy predicts B-spline parameters instead of discrete action chunks. -->
+                        </p>
+                    </div>
+
+                    <figure class="bspline-figure" aria-label="Interactive cubic B-spline with draggable control points and knots">
+                        <div class="bspline-toolbar">
+                            <div class="bspline-status">degree 3 · 7 controls · 3 knots</div>
+                            <div class="bspline-toolbar-right">
+                                <div class="bspline-buttons">
+                                    <button type="button" class="bspline-play">Animate</button>
+                                    <button type="button" class="bspline-reset">Reset</button>
+                                </div>
+                                <p class="bspline-caption-inline bspline-caption-hint">
+                                    <svg class="bspline-hint-left" viewBox="0 0 30 14" fill="none" aria-hidden="true">
+                                        <path d="M3 7h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Try dragging the
+                                        <span style="color: rgb(238, 200, 176); font-weight: 600;">control points</span> and
+                                        <span id="bspline-knots-word" style="color: rgb(255, 181, 70); font-weight: 600;">knots</span> yourself!
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <svg class="bspline-svg" viewBox="0 0 800 320" role="img"
+                             preserveAspectRatio="xMidYMid meet">
+                            <g class="bspline-grid"></g>
+                            <polyline class="bspline-control-poly"></polyline>
+                            <polyline class="bspline-curve"></polyline>
+                            <g class="bspline-control-points"></g>
+                            <line class="bspline-knot-rail"></line>
+                            <g class="bspline-knot-ends"></g>
+                            <g class="bspline-knots"></g>
+                            <!-- <text class="bspline-label bspline-control-label" x="58" y="24">control polygon</text> -->
+                            <text class="bspline-label bspline-knot-label-main" x="58" y="314">knot vector</text>
+                        </svg>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <!-- B_Spline_Intro controller (interactive, no dependencies) -->
+        <script>
+            (function () {
+                var SVG_NS = 'http://www.w3.org/2000/svg';
+                var section = document.querySelector('#bspline-section');
+                var svg = section && section.querySelector('.bspline-svg');
+                if (!svg) return;
+
+                var VIEW_W = 800, VIEW_H = 320;
+                var PAD = { left: 44, right: 26, top: 36, bottom: 72 };
+                var DEGREE = 3;
+                var RAIL_Y = 280;
+                var RESET_MS = 420;
+                var MIN_KNOT_GAP = 0.045;
+                var CURVE_SAMPLES = 220;
+
+                var initialControls = [
+                    { x: 0.06, y: 0.66 },
+                    { x: 0.18, y: 0.25 },
+                    { x: 0.34, y: 0.18 },
+                    { x: 0.48, y: 0.78 },
+                    { x: 0.63, y: 0.70 },
+                    { x: 0.78, y: 0.29 },
+                    { x: 0.94, y: 0.48 }
+                ];
+                var initialKnots = [0.22, 0.43, 0.68];
+                var controls = cloneControls(initialControls);
+                var internalKnots = initialKnots.slice();
+                var drag = null;
+                var resetRaf = null;
+
+                var grid = svg.querySelector('.bspline-grid');
+                var controlPoly = svg.querySelector('.bspline-control-poly');
+                var curve = svg.querySelector('.bspline-curve');
+                var controlLayer = svg.querySelector('.bspline-control-points');
+                var knotRail = svg.querySelector('.bspline-knot-rail');
+                var knotEnds = svg.querySelector('.bspline-knot-ends');
+                var knotLayer = svg.querySelector('.bspline-knots');
+                var reset = section.querySelector('.bspline-reset');
+                var playBtn = section.querySelector('.bspline-play');
+                var playRaf = null;
+
+                // Auto-animation: drag a single control point along a looping path.
+                var ANIM_INDEX = 3;
+                var ctrlAnim = initialControls.map(function (p) {
+                    return { baseX: p.x, baseY: p.y, ampX: 0.13, ampY: 0.18, w: 1.1 };
+                });
+
+                function cloneControls(points) {
+                    return points.map(function (p) { return { x: p.x, y: p.y }; });
+                }
+
+                function clamp(v, lo, hi) {
+                    return Math.max(lo, Math.min(hi, v));
+                }
+
+                function easeOutCubic(t) {
+                    return 1 - Math.pow(1 - t, 3);
+                }
+
+                function mapX(x) {
+                    return PAD.left + x * (VIEW_W - PAD.left - PAD.right);
+                }
+
+                function mapY(y) {
+                    return (VIEW_H - PAD.bottom) - y * (VIEW_H - PAD.top - PAD.bottom);
+                }
+
+                function unmapX(px) {
+                    return clamp((px - PAD.left) / (VIEW_W - PAD.left - PAD.right), 0, 1);
+                }
+
+                function unmapY(py) {
+                    return clamp(((VIEW_H - PAD.bottom) - py) / (VIEW_H - PAD.top - PAD.bottom), 0, 1);
+                }
+
+                function pointerToView(ev) {
+                    var rect = svg.getBoundingClientRect();
+                    return {
+                        x: (ev.clientX - rect.left) * (VIEW_W / rect.width),
+                        y: (ev.clientY - rect.top) * (VIEW_H / rect.height)
+                    };
+                }
+
+                function makeEl(name, attrs) {
+                    var el = document.createElementNS(SVG_NS, name);
+                    for (var key in attrs) el.setAttribute(key, attrs[key]);
+                    return el;
+                }
+
+                function clear(el) {
+                    while (el && el.firstChild) el.removeChild(el.firstChild);
+                }
+
+                function knotVector() {
+                    var knots = [];
+                    for (var i = 0; i <= DEGREE; i++) knots.push(0);
+                    for (var j = 0; j < internalKnots.length; j++) knots.push(internalKnots[j]);
+                    for (var k = 0; k <= DEGREE; k++) knots.push(1);
+                    return knots;
+                }
+
+                function basis(i, p, u, knots) {
+                    if (p === 0) {
+                        return (knots[i] <= u && u < knots[i + 1]) ? 1 : 0;
+                    }
+                    var left = 0;
+                    var leftDenom = knots[i + p] - knots[i];
+                    if (leftDenom > 0) {
+                        left = ((u - knots[i]) / leftDenom) * basis(i, p - 1, u, knots);
+                    }
+                    var right = 0;
+                    var rightDenom = knots[i + p + 1] - knots[i + 1];
+                    if (rightDenom > 0) {
+                        right = ((knots[i + p + 1] - u) / rightDenom) * basis(i + 1, p - 1, u, knots);
+                    }
+                    return left + right;
+                }
+
+                function curvePoint(u, knots) {
+                    if (u >= 1) return controls[controls.length - 1];
+                    var x = 0, y = 0;
+                    for (var i = 0; i < controls.length; i++) {
+                        var b = basis(i, DEGREE, u, knots);
+                        x += controls[i].x * b;
+                        y += controls[i].y * b;
+                    }
+                    return { x: x, y: y };
+                }
+
+                function renderGrid() {
+                    clear(grid);
+                    for (var i = 0; i <= 4; i++) {
+                        var y = PAD.top + (VIEW_H - PAD.top - PAD.bottom) * (i / 4);
+                        grid.appendChild(makeEl('line', {
+                            x1: PAD.left, x2: VIEW_W - PAD.right, y1: y, y2: y
+                        }));
+                    }
+                }
+
+                function render() {
+                    var knots = knotVector();
+                    var controlCoords = controls.map(function (p) {
+                        return mapX(p.x) + ',' + mapY(p.y);
+                    });
+                    controlPoly.setAttribute('points', controlCoords.join(' '));
+
+                    var curveCoords = [];
+                    for (var i = 0; i < CURVE_SAMPLES; i++) {
+                        var u = i / (CURVE_SAMPLES - 1);
+                        var p = curvePoint(u, knots);
+                        curveCoords.push(mapX(p.x) + ',' + mapY(p.y));
+                    }
+                    curve.setAttribute('points', curveCoords.join(' '));
+
+                    renderControlPoints();
+                    renderKnots();
+                }
+
+                function renderControlPoints() {
+                    clear(controlLayer);
+                    for (var i = 0; i < controls.length; i++) {
+                        var p = controls[i];
+                        var hit = makeEl('circle', {
+                            class: 'bspline-hit-target',
+                            cx: mapX(p.x),
+                            cy: mapY(p.y),
+                            r: 18,
+                            'data-index': String(i)
+                        });
+                        hit.addEventListener('pointerdown', startControlDrag);
+                        var c = makeEl('circle', {
+                            class: 'bspline-control-point' + (drag && drag.type === 'control' && drag.index === i ? ' is-dragging' : ''),
+                            cx: mapX(p.x),
+                            cy: mapY(p.y),
+                            r: 6,
+                            tabindex: '0',
+                            'data-index': String(i),
+                            'aria-label': 'Control point ' + (i + 1)
+                        });
+                        c.appendChild(makeEl('title', {}));
+                        c.firstChild.textContent = 'Control point ' + (i + 1);
+                        c.addEventListener('pointerdown', startControlDrag);
+                        controlLayer.appendChild(hit);
+                        controlLayer.appendChild(c);
+                    }
+                }
+
+                function renderKnots() {
+                    knotRail.setAttribute('x1', PAD.left);
+                    knotRail.setAttribute('x2', VIEW_W - PAD.right);
+                    knotRail.setAttribute('y1', RAIL_Y);
+                    knotRail.setAttribute('y2', RAIL_Y);
+
+                    clear(knotEnds);
+
+                    clear(knotLayer);
+                    for (var i = 0; i < internalKnots.length; i++) {
+                        var u = internalKnots[i];
+                        var g = makeEl('g', {});
+                        var hit = makeEl('circle', {
+                            class: 'bspline-hit-target bspline-knot-hit',
+                            cx: mapX(u),
+                            cy: RAIL_Y,
+                            r: 18,
+                            'data-index': String(i)
+                        });
+                        hit.addEventListener('pointerdown', startKnotDrag);
+                        var kx = mapX(u), ks = 6;
+                        var k = makeEl('polygon', {
+                            class: 'bspline-knot' + (drag && drag.type === 'knot' && drag.index === i ? ' is-dragging' : ''),
+                            points: kx + ',' + (RAIL_Y - ks) + ' ' + (kx + ks) + ',' + RAIL_Y + ' ' +
+                                    kx + ',' + (RAIL_Y + ks) + ' ' + (kx - ks) + ',' + RAIL_Y,
+                            tabindex: '0',
+                            'data-index': String(i),
+                            'aria-label': 'Internal knot ' + (i + 1)
+                        });
+                        k.appendChild(makeEl('title', {}));
+                        k.firstChild.textContent = 'Internal knot ' + (i + 1);
+                        k.addEventListener('pointerdown', startKnotDrag);
+                        var label = makeEl('text', {
+                            class: 'bspline-knot-label',
+                            x: mapX(u),
+                            y: RAIL_Y + 24
+                        });
+                        label.textContent = u.toFixed(2);
+                        g.appendChild(hit);
+                        g.appendChild(k);
+                        g.appendChild(label);
+                        knotLayer.appendChild(g);
+                    }
+                }
+
+                function startControlDrag(ev) {
+                    ev.preventDefault();
+                    stopResetAnimation();
+                    stopPlay();
+                    drag = { type: 'control', index: parseInt(this.getAttribute('data-index'), 10) };
+                    svg.setPointerCapture(ev.pointerId);
+                    render();
+                }
+
+                function startKnotDrag(ev) {
+                    ev.preventDefault();
+                    stopResetAnimation();
+                    stopPlay();
+                    drag = { type: 'knot', index: parseInt(this.getAttribute('data-index'), 10) };
+                    svg.setPointerCapture(ev.pointerId);
+                    render();
+                }
+
+                function onPointerMove(ev) {
+                    if (!drag) return;
+                    var pt = pointerToView(ev);
+                    if (drag.type === 'control') {
+                        controls[drag.index] = { x: unmapX(pt.x), y: unmapY(pt.y) };
+                    } else {
+                        var idx = drag.index;
+                        var lower = idx === 0 ? MIN_KNOT_GAP : internalKnots[idx - 1] + MIN_KNOT_GAP;
+                        var upper = idx === internalKnots.length - 1 ? 1 - MIN_KNOT_GAP : internalKnots[idx + 1] - MIN_KNOT_GAP;
+                        internalKnots[idx] = clamp(unmapX(pt.x), lower, upper);
+                    }
+                    render();
+                }
+
+                function onPointerUp(ev) {
+                    if (!drag) return;
+                    try { svg.releasePointerCapture(ev.pointerId); } catch (e) {}
+                    drag = null;
+                    render();
+                }
+
+                function stopResetAnimation() {
+                    if (resetRaf && typeof cancelAnimationFrame === 'function') {
+                        cancelAnimationFrame(resetRaf);
+                    }
+                    resetRaf = null;
+                }
+
+                function stopPlay() {
+                    if (playRaf && typeof cancelAnimationFrame === 'function') {
+                        cancelAnimationFrame(playRaf);
+                    }
+                    playRaf = null;
+                    if (playBtn) {
+                        playBtn.classList.remove('is-playing');
+                        playBtn.textContent = 'Animate';
+                    }
+                }
+
+                function startPlay() {
+                    if (typeof requestAnimationFrame !== 'function' || typeof performance === 'undefined') return;
+                    stopResetAnimation();
+                    var start = performance.now();
+                    if (playBtn) {
+                        playBtn.classList.add('is-playing');
+                        playBtn.textContent = 'Pause';
+                    }
+                    function frame(now) {
+                        var t = (now - start) / 1000;
+                        // Animate a single control point up and down only.
+                        var c = ctrlAnim[ANIM_INDEX];
+                        controls[ANIM_INDEX].y = clamp(c.baseY + c.ampY * Math.sin(c.w * t), 0, 1);
+                        render();
+                        playRaf = requestAnimationFrame(frame);
+                    }
+                    playRaf = requestAnimationFrame(frame);
+                }
+
+                function togglePlay() {
+                    if (playRaf) stopPlay();
+                    else startPlay();
+                }
+
+                function resetScene() {
+                    stopResetAnimation();
+                    stopPlay();
+                    var fromControls = cloneControls(controls);
+                    var fromKnots = internalKnots.slice();
+                    if (typeof requestAnimationFrame !== 'function' || typeof performance === 'undefined') {
+                        controls = cloneControls(initialControls);
+                        internalKnots = initialKnots.slice();
+                        render();
+                        return;
+                    }
+                    var start = performance.now();
+                    function frame(now) {
+                        var t = Math.min(1, (now - start) / RESET_MS);
+                        var e = easeOutCubic(t);
+                        for (var i = 0; i < controls.length; i++) {
+                            controls[i].x = fromControls[i].x + (initialControls[i].x - fromControls[i].x) * e;
+                            controls[i].y = fromControls[i].y + (initialControls[i].y - fromControls[i].y) * e;
+                        }
+                        for (var k = 0; k < internalKnots.length; k++) {
+                            internalKnots[k] = fromKnots[k] + (initialKnots[k] - fromKnots[k]) * e;
+                        }
+                        render();
+                        if (t < 1) resetRaf = requestAnimationFrame(frame);
+                        else resetRaf = null;
+                    }
+                    resetRaf = requestAnimationFrame(frame);
+                }
+
+                svg.addEventListener('pointermove', onPointerMove);
+                svg.addEventListener('pointerup', onPointerUp);
+                svg.addEventListener('pointercancel', onPointerUp);
+                if (reset) reset.addEventListener('click', resetScene);
+                if (playBtn) playBtn.addEventListener('click', togglePlay);
+
+                renderGrid();
+                render();
+
+                // Auto-animate: start playing when the figure scrolls into view,
+                // pause when it leaves (and respect reduced-motion preferences).
+                var prefersReduced = typeof matchMedia === 'function' &&
+                    matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (!prefersReduced) {
+                    if (typeof IntersectionObserver === 'function') {
+                        var io = new IntersectionObserver(function (entries) {
+                            entries.forEach(function (entry) {
+                                if (drag) return; // don't fight the user
+                                if (entry.isIntersecting) {
+                                    if (!playRaf) startPlay();
+                                } else {
+                                    if (playRaf) stopPlay();
+                                }
+                            });
+                        }, { threshold: 0.25 });
+                        io.observe(svg);
+                    } else {
+                        startPlay();
+                    }
+                }
+            })();
+        </script>
+
+        <div class="row top30 bottom30" id="fit-section">
+            <div class="col-md-12">
+                <hr class="section-line">
+                <div class="fit-header">
+                    <h2 id="adaptive-fitting">Fitting a B-spline</h2>
+                    <p>
+                    The animation shows the iterative fitting of a B-spline to approximate a trajectory.
+                    Given a set of <span style="color: rgb(64, 99, 150); font-weight: 600;">discrete waypoints</span> from a trajectory, it starts with only the two boundary knots and a coarse
+                    least-squares B-spline. It measures the <span style="color: #f54254; font-weight: 600;">reconstruction
+                    error</span> against the target trajectory, drops a new <span style="color: rgb(255, 181, 70); font-weight: 600;">knot</span>
+                    where the error is worst, and refits. The loop repeats until the largest error
+                    falls at or below the selected threshold, then it starts over.
+                    </p>
+                    <div class="fit-toolbar">
+                        <div class="fit-status">
+                            <span class="fit-threshold-label"></span>
+                            <span class="fit-error-label"></span>
+                            <span class="fit-knots-label"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <figure class="fit-figure" aria-label="Animated B-spline knot-insertion fitting loop">
+                    <svg class="fit-svg" viewBox="0 0 800 360" role="img"
+                         preserveAspectRatio="xMidYMid meet">
+                        <g class="fit-axis"></g>
+                        <g class="fit-residual"></g>
+                        <g class="fit-control"></g>
+                        <polyline class="fit-curve" fill="none"></polyline>
+                        <g class="fit-points"></g>
+                        <g class="fit-worst"></g>
+                        <line class="fit-knot-rail"></line>
+                        <g class="fit-knots"></g>
+                    </svg>
+                    <div class="fit-empty" hidden>
+                        The fitting diagram could not load its data. The rest of the page is unaffected.
+                    </div>
+                </figure>
+
+                <div class="fit-overlay">
+                    <div class="fit-control-block">
+                        <div class="fit-control-title">
+                            <span>Error threshold</span>
+                            <span class="fit-control-hint">stricter &rarr; more knots</span>
+                        </div>
+                        <input type="range" class="fit-slider" min="0" max="7" step="1" value="4"
+                               aria-label="Fitting error threshold" />
+                        <div class="fit-scale" aria-hidden="true"></div>
+                    </div>
+                </div>
+
+                <p class="text-caption-small fit-caption">
+
+                </p>
+            </div>
+        </div>
+
+        <script src="./data.js"></script>
+
+        <!-- Fitting_Diagram controller (data-driven, guarded, isolated IIFE) -->
+        <script>
+            (function () {
+                try {
+                    var SVG_NS = 'http://www.w3.org/2000/svg';
+                    var section = document.querySelector('#fit-section');
+                    var svg = section && section.querySelector('.fit-svg');
+                    if (!svg) return; // diagram absent -> no-op, no error (selector: #fit-section .fit-svg)
+
+                    // ---- Configuration ---------------------------------------
+                    var VIEW_W = 800, VIEW_H = 360;
+                    var PAD = { left: 44, right: 22, top: 24, bottom: 40 };
+                    var DEFAULT_TIER = 4;        // index 4 -> threshold 0.1
+                    var ITER_HOLD_MS = 1150;     // dwell per iteration
+                    var MORPH_MS = 380;          // curve morph duration
+                    var KNOT_RAIL_Y = VIEW_H - 18;
+                    var KNOT_MARKER_SIZE = 6;
+
+                    // ---- Reduced-motion detection (guarded for jsdom) --------
+                    function prefersReducedMotion() {
+                        try {
+                            return !!(typeof window !== 'undefined' &&
+                                window.matchMedia &&
+                                window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+
+                    function logWarn(e) {
+                        if (typeof window !== 'undefined' && window.console) {
+                            console.warn('fitting-diagram:', e);
+                        }
+                    }
+
+                    // ---- DataStore: read-only view over the payload ----------
+                    function DataStore(payload) {
+                        this.payload = payload;
+                        this.tiers = payload.tiers;
+                        this.dataPoints = payload.data_points || { x: [], y: [] };
+                        this.sampling = payload.sampling || {};
+                        this.tierCount = payload.tiers.length;
+                        this.curveX = deriveCurveSamples(payload);
+                    }
+                    DataStore.prototype.tierAt = function (i) { return this.tiers[i]; };
+                    DataStore.prototype.thresholdAt = function (i) { return this.tiers[i].max_error; };
+                    DataStore.prototype.iterationsAt = function (i) { return this.tiers[i].iterations; };
+
+                    function deriveCurveSamples(payload) {
+                        var sampling = payload.sampling || {};
+                        var xr = sampling.x_range;
+                        var count = sampling.curve_sample_count;
+                        if (xr && xr.length === 2 && count > 1) {
+                            var xs = new Array(count);
+                            for (var i = 0; i < count; i++) {
+                                xs[i] = xr[0] + (xr[1] - xr[0]) * (i / (count - 1));
+                            }
+                            return xs;
+                        }
+
+                        var tiers = payload.tiers || [];
+                        for (var t = 0; t < tiers.length; t++) {
+                            var its = tiers[t].iterations || [];
+                            for (var j = 0; j < its.length; j++) {
+                                if (its[j].curve_x && its[j].curve_x.length) {
+                                    return its[j].curve_x;
+                                }
+                            }
+                        }
+                        return [];
+                    }
+
+                    // ---- Bounds derivation -----------------------------------
+                    // xMin/xMax from sampling.x_range (fallback to data x extents);
+                    // yMin/yMax from data y AND every tier/iteration curve_y and
+                    // control_y, then padded ~10% vertically. Degenerate extents
+                    // are left for the mapping divide-by-zero guard to absorb.
+                    function deriveBounds(store) {
+                        var dp = store.dataPoints || { x: [], y: [] };
+                        var xs = dp.x || [], ys = dp.y || [];
+                        var xMin, xMax;
+                        var xr = store.sampling && store.sampling.x_range;
+                        if (xr && xr.length === 2 && isFinite(xr[0]) && isFinite(xr[1])) {
+                            xMin = xr[0]; xMax = xr[1];
+                        } else {
+                            xMin = Infinity; xMax = -Infinity;
+                            for (var i = 0; i < xs.length; i++) {
+                                if (xs[i] < xMin) xMin = xs[i];
+                                if (xs[i] > xMax) xMax = xs[i];
+                            }
+                        }
+                        var yMin = Infinity, yMax = -Infinity;
+                        function acc(arr) {
+                            if (!arr) return;
+                            for (var k = 0; k < arr.length; k++) {
+                                var v = arr[k];
+                                if (typeof v !== 'number' || !isFinite(v)) continue;
+                                if (v < yMin) yMin = v;
+                                if (v > yMax) yMax = v;
+                            }
+                        }
+                        acc(ys);
+                        var tiers = store.tiers || [];
+                        for (var t = 0; t < tiers.length; t++) {
+                            var its = tiers[t].iterations || [];
+                            for (var j = 0; j < its.length; j++) {
+                                acc(its[j].curve_y);
+                                acc(its[j].control_y);
+                            }
+                        }
+                        // Fallbacks for empty/degenerate inputs.
+                        if (!isFinite(xMin) || !isFinite(xMax)) { xMin = 0; xMax = 1; }
+                        if (!isFinite(yMin) || !isFinite(yMax)) { yMin = 0; yMax = 1; }
+                        // ~10% vertical margin.
+                        var span = yMax - yMin;
+                        var margin = span > 0 ? span * 0.1 : 0;
+                        yMin -= margin;
+                        yMax += margin;
+                        return { xMin: xMin, xMax: xMax, yMin: yMin, yMax: yMax };
+                    }
+
+                    // ---- Coordinate mapping (data -> viewBox) ----------------
+                    // Linear, padded, y-flipped. A degenerate (zero) extent treats
+                    // the normalized ratio as 0, so the result is never NaN and
+                    // stays inside the padded rect. Bound to `bounds` at init.
+                    var bounds = { xMin: 0, xMax: 1, yMin: 0, yMax: 1 };
+                    function mapX(x) {
+                        var innerW = VIEW_W - PAD.left - PAD.right;
+                        var ratio = bounds.xMax === bounds.xMin
+                            ? 0 : (x - bounds.xMin) / (bounds.xMax - bounds.xMin);
+                        return PAD.left + ratio * innerW;
+                    }
+                    function mapY(y) {
+                        var innerH = VIEW_H - PAD.top - PAD.bottom;
+                        var ratio = bounds.yMax === bounds.yMin
+                            ? 0 : (y - bounds.yMin) / (bounds.yMax - bounds.yMin);
+                        return (VIEW_H - PAD.bottom) - ratio * innerH;
+                    }
+
+                    function clearGroup(group) {
+                        if (!group) return;
+                        while (group.firstChild) group.removeChild(group.firstChild);
+                    }
+
+                    // ---- SvgRenderer -----------------------------------------
+                    function SvgRenderer(svgEl, store) {
+                        this.svg = svgEl;
+                        this.store = store;
+                        this.axis = svgEl.querySelector('.fit-axis');
+                        this.residual = svgEl.querySelector('.fit-residual');
+                        this.control = svgEl.querySelector('.fit-control');
+                        this.curve = svgEl.querySelector('.fit-curve');
+                        this.points = svgEl.querySelector('.fit-points');
+                        this.worst = svgEl.querySelector('.fit-worst');
+                        this.knotRail = svgEl.querySelector('.fit-knot-rail');
+                        this.knots = svgEl.querySelector('.fit-knots');
+                        // Status labels live in the section header (outside the figure).
+                        var root = svgEl.closest('#fit-section') || svgEl.parentNode;
+                        this.thresholdLabel = root && root.querySelector('.fit-threshold-label');
+                        this.errorLabel = root && root.querySelector('.fit-error-label');
+                        this.knotsLabel = root && root.querySelector('.fit-knots-label');
+                        this._morphRaf = null;
+                    }
+
+                    // Faint axis gridlines + one grey circle per data sample.
+                    // Idempotent: clears its groups first.
+                    SvgRenderer.prototype.buildStatic = function () {
+                        // Axis frame: a baseline and a left edge.
+                        clearGroup(this.axis);
+                        if (this.axis) {
+                            var rows = 4;
+                            for (var r = 0; r <= rows; r++) {
+                                var gy = PAD.top + (VIEW_H - PAD.top - PAD.bottom) * (r / rows);
+                                var hLine = document.createElementNS(SVG_NS, 'line');
+                                hLine.setAttribute('x1', PAD.left);
+                                hLine.setAttribute('x2', VIEW_W - PAD.right);
+                                hLine.setAttribute('y1', gy);
+                                hLine.setAttribute('y2', gy);
+                                this.axis.appendChild(hLine);
+                            }
+                        }
+                        // Data points (static across all tiers/iterations).
+                        clearGroup(this.points);
+                        if (this.points) {
+                            var dp = this.store.dataPoints || { x: [], y: [] };
+                            var xs = dp.x || [], ys = dp.y || [];
+                            for (var i = 0; i < xs.length; i++) {
+                                var c = document.createElementNS(SVG_NS, 'circle');
+                                c.setAttribute('cx', mapX(xs[i]));
+                                c.setAttribute('cy', mapY(ys[i]));
+                                c.setAttribute('r', 3.4);
+                                this.points.appendChild(c);
+                            }
+                        }
+                        if (this.knotRail) {
+                            this.knotRail.setAttribute('x1', PAD.left);
+                            this.knotRail.setAttribute('x2', VIEW_W - 12);
+                            this.knotRail.setAttribute('y1', KNOT_RAIL_Y);
+                            this.knotRail.setAttribute('y2', KNOT_RAIL_Y);
+                        }
+                    };
+
+                    SvgRenderer.prototype._setCurvePoints = function (curveX, curveY) {
+                        if (!this.curve) return;
+                        var coords = [];
+                        var n = Math.min(curveX.length, curveY.length);
+                        for (var i = 0; i < n; i++) {
+                            coords.push(mapX(curveX[i]) + ',' + mapY(curveY[i]));
+                        }
+                        this.curve.setAttribute('points', coords.join(' '));
+                    };
+
+                    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+                    SvgRenderer.prototype._morphCurve = function (curveX, fromY, toY) {
+                        var self = this;
+                        if (this._morphRaf && typeof cancelAnimationFrame === 'function') {
+                            cancelAnimationFrame(this._morphRaf);
+                            this._morphRaf = null;
+                        }
+                        if (typeof requestAnimationFrame !== 'function' ||
+                            typeof performance === 'undefined') {
+                            this._setCurvePoints(curveX, toY);
+                            return;
+                        }
+                        var start = performance.now();
+                        var n = Math.min(fromY.length, toY.length);
+                        function frame(now) {
+                            var t = Math.min(1, (now - start) / MORPH_MS);
+                            var e = easeOutCubic(t);
+                            var blended = new Array(n);
+                            for (var i = 0; i < n; i++) {
+                                blended[i] = fromY[i] + (toY[i] - fromY[i]) * e;
+                            }
+                            self._setCurvePoints(curveX, blended);
+                            if (t < 1) {
+                                self._morphRaf = requestAnimationFrame(frame);
+                            } else {
+                                self._morphRaf = null;
+                            }
+                        }
+                        this._morphRaf = requestAnimationFrame(frame);
+                    };
+
+                    // Render one iteration. Each per-iteration layer is cleared
+                    // then repopulated (idempotent). Driven entirely by payload
+                    // fields; no curve synthesis.
+                    SvgRenderer.prototype.renderIteration = function (it, prevIt, animate, tier) {
+                        if (!it) return;
+                        var i;
+
+                        // --- CURVE (optionally morph from prev) ---------------
+                        var curveX = (it.curve_x && it.curve_x.length) ? it.curve_x : this.store.curveX;
+                        var curveY = it.curve_y || [];
+                        if (animate && prevIt && prevIt.curve_y &&
+                            prevIt.curve_y.length === curveY.length && curveY.length > 0) {
+                            this._morphCurve(curveX, prevIt.curve_y, curveY);
+                        } else {
+                            if (this._morphRaf && typeof cancelAnimationFrame === 'function') {
+                                cancelAnimationFrame(this._morphRaf);
+                                this._morphRaf = null;
+                            }
+                            this._setCurvePoints(curveX, curveY);
+                        }
+
+                        // --- CONTROL POLYGON (faint, decorative) --------------
+                        clearGroup(this.control);
+                        if (this.control && it.control_x && it.control_y) {
+                            var ctrlCoords = [];
+                            var cn = Math.min(it.control_x.length, it.control_y.length);
+                            for (i = 0; i < cn; i++) {
+                                ctrlCoords.push(mapX(it.control_x[i]) + ',' + mapY(it.control_y[i]));
+                            }
+                            if (cn > 0) {
+                                var poly = document.createElementNS(SVG_NS, 'polyline');
+                                poly.setAttribute('points', ctrlCoords.join(' '));
+                                this.control.appendChild(poly);
+                                for (i = 0; i < cn; i++) {
+                                    var cc = document.createElementNS(SVG_NS, 'circle');
+                                    cc.setAttribute('cx', mapX(it.control_x[i]));
+                                    cc.setAttribute('cy', mapY(it.control_y[i]));
+                                    cc.setAttribute('r', 6);
+                                    this.control.appendChild(cc);
+                                }
+                            }
+                        }
+
+                        // --- RESIDUAL STEMS (faint, decorative) ---------------
+                        clearGroup(this.residual);
+                        if (this.residual && it.pred_y) {
+                            var dp = this.store.dataPoints || { x: [], y: [] };
+                            var sampleX = (it.sample_x && it.sample_x.length) ? it.sample_x : dp.x || [];
+                            var dy = dp.y || [];
+                            var rn = Math.min(sampleX.length, it.pred_y.length, dy.length);
+                            for (i = 0; i < rn; i++) {
+                                var rLine = document.createElementNS(SVG_NS, 'line');
+                                rLine.setAttribute('x1', mapX(sampleX[i]));
+                                rLine.setAttribute('x2', mapX(sampleX[i]));
+                                rLine.setAttribute('y1', mapY(dy[i]));
+                                rLine.setAttribute('y2', mapY(it.pred_y[i]));
+                                this.residual.appendChild(rLine);
+                            }
+                        }
+
+                        // --- INTERIOR KNOTS ON A SEPARATE KNOT AXIS -----------
+                        clearGroup(this.knots);
+                        if (this.knots && it.interior_knots_x) {
+                            var kx = it.interior_knots_x;
+                            var newSet = {};
+                            if (animate && it.new_knots_x) {
+                                for (i = 0; i < it.new_knots_x.length; i++) {
+                                    newSet[it.new_knots_x[i]] = true;
+                                }
+                            } else if (animate && prevIt && prevIt.interior_knots_x) {
+                                var prevKnots = prevIt.interior_knots_x;
+                                for (i = 0; i < kx.length; i++) {
+                                    var isOld = false;
+                                    for (var p = 0; p < prevKnots.length; p++) {
+                                        if (Math.abs(kx[i] - prevKnots[p]) < 1e-6) {
+                                            isOld = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!isOld) newSet[kx[i]] = true;
+                                }
+                            }
+                            for (i = 0; i < kx.length; i++) {
+                                var knotX = mapX(kx[i]);
+                                var ks = KNOT_MARKER_SIZE;
+                                var diamond = document.createElementNS(SVG_NS, 'polygon');
+                                diamond.setAttribute('points',
+                                    knotX + ',' + (KNOT_RAIL_Y - ks) + ' ' +
+                                    (knotX + ks) + ',' + KNOT_RAIL_Y + ' ' +
+                                    knotX + ',' + (KNOT_RAIL_Y + ks) + ' ' +
+                                    (knotX - ks) + ',' + KNOT_RAIL_Y);
+                                if (newSet[kx[i]]) {
+                                    diamond.setAttribute('class', 'fit-knot-pop');
+                                }
+                                this.knots.appendChild(diamond);
+                            }
+                        }
+
+                        // --- WORST-ERROR INDICATOR (hidden when converged) ----
+                        clearGroup(this.worst);
+                        if (this.worst && !it.converged) {
+                            var wx = mapX(it.max_error_x);
+                            var wLine = document.createElementNS(SVG_NS, 'line');
+                            wLine.setAttribute('x1', wx);
+                            wLine.setAttribute('x2', wx);
+                            wLine.setAttribute('y1', mapY(it.max_error_data_y));
+                            wLine.setAttribute('y2', mapY(it.max_error_pred_y));
+                            this.worst.appendChild(wLine);
+                            var ring = document.createElementNS(SVG_NS, 'circle');
+                            ring.setAttribute('cx', wx);
+                            ring.setAttribute('cy', mapY(it.max_error_pred_y));
+                            ring.setAttribute('r', 7);
+                            this.worst.appendChild(ring);
+                        }
+
+                        // --- STATUS LABELS ------------------------------------
+                        if (this.thresholdLabel && tier) {
+                            this.thresholdLabel.textContent = 'threshold \u2264 ' + tier.max_error;
+                        }
+                        if (this.errorLabel) {
+                            var err = typeof it.max_error_achieved === 'number'
+                                ? it.max_error_achieved.toFixed(3) : '\u2014';
+                            this.errorLabel.textContent = 'max error ' + err;
+                        }
+                        if (this.knotsLabel) {
+                            var knotCount = typeof it.n_knots === 'number'
+                                ? it.n_knots
+                                : (it.interior_knots_x || []).length;
+                            this.knotsLabel.textContent = it.converged
+                                ? 'converged \u00b7 knots: ' + knotCount
+                                : 'knots: ' + knotCount;
+                        }
+                    };
+
+                    // ---- Pure cyclic advance ---------------------------------
+                    function advance(i, n) { return (i + 1) % n; }
+
+                    // ---- IterationController (auto-loop) ---------------------
+                    function IterationController(onFrame) {
+                        this.onFrame = onFrame;   // onFrame(idx, instant)
+                        this.iterations = [];
+                        this.idx = 0;
+                        this.timer = null;
+                    }
+                    IterationController.prototype.stop = function () {
+                        if (this.timer !== null) { clearTimeout(this.timer); this.timer = null; }
+                    };
+                    IterationController.prototype.loadTier = function (iterations) {
+                        this.stop();
+                        this.iterations = iterations || [];
+                        this.idx = 0;
+                        if (!this.iterations.length) return;
+                        this.onFrame(0, true);   // initial iteration, no morph
+                        this.play();
+                    };
+                    IterationController.prototype.play = function () {
+                        var self = this;
+                        this.stop();
+                        var n = this.iterations.length;
+                        if (!n) return;
+                        function tick() {
+                            var cur = self.iterations[self.idx];
+                            var converged = cur && cur.converged;
+                            var hold = converged ? (ITER_HOLD_MS + MORPH_MS) : ITER_HOLD_MS;
+                            self.timer = setTimeout(function () {
+                                self.idx = advance(self.idx, n);
+                                // instant when wrapping back to the initial frame.
+                                var instant = self.idx === 0;
+                                self.onFrame(self.idx, instant);
+                                tick();
+                            }, hold);
+                        }
+                        tick();
+                    };
+
+                    // ---- Module-scoped wiring state --------------------------
+                    var store = null;
+                    var renderer = null;
+                    var controller = null;
+                    var slider = null;
+                    var scaleEl = null;
+
+                    function renderFrame(idx, instant) {
+                        if (!store || !renderer || !controller) return;
+                        var its = controller.iterations;
+                        if (!its || !its.length) return;
+                        var it = its[idx];
+                        var prevIt = idx > 0 ? its[idx - 1] : null;
+                        var animate = !instant && !prefersReducedMotion();
+                        renderer.renderIteration(it, prevIt, animate, activeTier);
+                    }
+
+                    var activeTierIndex = DEFAULT_TIER;
+                    var activeTier = null;
+
+                    // ---- ThresholdControl (slider + scale) -------------------
+                    function buildScale() {
+                        if (!scaleEl || !store) return;
+                        clearGroup(scaleEl);
+                        for (var i = 0; i < store.tierCount; i++) {
+                            (function (idx) {
+                                var span = document.createElement('span');
+                                span.textContent = store.thresholdAt(idx);
+                                span.setAttribute('data-tier', String(idx));
+                                span.addEventListener('click', function () {
+                                    if (slider) slider.value = String(idx);
+                                    switchTier(idx);
+                                });
+                                scaleEl.appendChild(span);
+                            })(i);
+                        }
+                    }
+
+                    function markActiveScale(i) {
+                        if (!scaleEl) return;
+                        var spans = scaleEl.querySelectorAll('span');
+                        for (var k = 0; k < spans.length; k++) {
+                            if (k === i) spans[k].classList.add('fit-scale-active');
+                            else spans[k].classList.remove('fit-scale-active');
+                        }
+                    }
+
+                    function switchTier(i) {
+                        if (!store) return;
+                        if (i < 0) i = 0;
+                        if (i > store.tierCount - 1) i = store.tierCount - 1;
+                        activeTierIndex = i;
+                        activeTier = store.tierAt(i);
+                        markActiveScale(i);
+                        if (renderer && renderer.thresholdLabel && activeTier) {
+                            renderer.thresholdLabel.textContent = 'threshold \u2264 ' + activeTier.max_error;
+                        }
+                        controller.loadTier(store.iterationsAt(i)); // restarts at iteration 0
+                    }
+
+                    function wireSlider() {
+                        slider = section.querySelector('.fit-slider');
+                        scaleEl = section.querySelector('.fit-scale');
+                        if (slider) {
+                            slider.min = '0';
+                            slider.max = String(store.tierCount - 1);
+                            slider.step = '1';
+                            slider.addEventListener('input', function () {
+                                var v = parseInt(slider.value, 10);
+                                if (isNaN(v)) v = DEFAULT_TIER;
+                                switchTier(v);
+                            });
+                        }
+                        buildScale();
+                    }
+
+                    // ---- Empty_State -----------------------------------------
+                    function showEmptyState() {
+                        try {
+                            var box = section.querySelector('.fit-empty');
+                            if (box) box.hidden = false;
+                        } catch (e) { /* contained */ }
+                    }
+
+                    // ---- init ------------------------------------------------
+                    function init(payload) {
+                        if (!payload || !payload.tiers || !payload.tiers.length) {
+                            showEmptyState();
+                            return;
+                        }
+                        store = new DataStore(payload);
+                        bounds = deriveBounds(store);
+                        renderer = new SvgRenderer(svg, store);
+                        renderer.buildStatic();
+                        controller = new IterationController(renderFrame);
+                        wireSlider();
+                        var def = DEFAULT_TIER;
+                        if (def > store.tierCount - 1) def = store.tierCount - 1;
+                        if (slider) slider.value = String(def);
+                        switchTier(def);
+                    }
+
+                    // ---- Data-integrity / monotonicity helpers (pure) --------
+                    function dataIntegrityOk(payload) {
+                        if (!payload || !payload.tiers || !payload.tiers.length) return false;
+                        for (var t = 0; t < payload.tiers.length; t++) {
+                            var tier = payload.tiers[t];
+                            var its = tier.iterations;
+                            if (!its || !its.length) return false;
+                            for (var j = 0; j < its.length; j++) {
+                                var it = its[j];
+                                var isFinal = j === its.length - 1;
+                                if (isFinal) {
+                                    if (it.converged !== true) return false;
+                                    if (!(it.max_error_achieved <= tier.max_error)) return false;
+                                } else {
+                                    if (!(it.max_error_achieved > tier.max_error)) return false;
+                                }
+                            }
+                        }
+                        return true;
+                    }
+
+                    function convergedInteriorCount(tier) {
+                        var its = tier.iterations;
+                        var last = its[its.length - 1];
+                        return (last.interior_knots_x || []).length;
+                    }
+
+                    function tierMonotonicOk(payload) {
+                        if (!payload || !payload.tiers || !payload.tiers.length) return false;
+                        var tiers = payload.tiers;
+                        for (var a = 0; a < tiers.length; a++) {
+                            for (var b = 0; b < tiers.length; b++) {
+                                // a stricter (smaller max_error) than b -> count(a) >= count(b)
+                                if (tiers[a].max_error < tiers[b].max_error) {
+                                    if (convergedInteriorCount(tiers[a]) < convergedInteriorCount(tiers[b])) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                        return true;
+                    }
+
+                    // ---- Async load (production only) ------------------------
+                    // The dev test harness sets window.__FIT_TEST__ before
+                    // evaluating and drives init via inject(payload), so skip the
+                    // auto-load there to keep tests deterministic (no network,
+                    // no hang). Production uses the JS payload because file://
+                    // pages cannot fetch sibling JSON in Chrome/Safari.
+                    if (!(typeof window !== 'undefined' && window.__FIT_TEST__)) {
+                        if (typeof window !== 'undefined' &&
+                            window.__FIT_DATA__ &&
+                            window.__FIT_DATA__.tiers &&
+                            window.__FIT_DATA__.tiers.length) {
+                            init(window.__FIT_DATA__);
+                        } else {
+                            showEmptyState();
+                        }
+                    }
+
+                    // ---- Dev-only test hook ----------------------------------
+                    if (typeof window !== 'undefined' && window.__FIT_TEST__) {
+                        window.__FIT_TEST__ = {
+                            mapX: mapX,
+                            mapY: mapY,
+                            advance: advance,
+                            deriveBounds: deriveBounds,
+                            dataIntegrityOk: dataIntegrityOk,
+                            tierMonotonicOk: tierMonotonicOk,
+                            inject: function (payload) { init(payload); },
+                            svg: svg,
+                            VIEW_W: VIEW_W,
+                            VIEW_H: VIEW_H,
+                            PAD: PAD,
+                            DEFAULT_TIER: DEFAULT_TIER
+                        };
+                    }
+                } catch (e) {
+                    // Error containment: keep existing page features working.
+                    if (typeof window !== 'undefined' && window.console) {
+                        console.warn('fitting-diagram disabled:', e);
+                    }
+                    try {
+                        var s = document.querySelector('#fit-section .fit-empty');
+                        if (s) s.hidden = false;
+                    } catch (e2) { /* contained */ }
+                }
+            })();
+        </script>
+
+        <div class="row top30 bottom30" id="policy-section">
+            <div class="col-md-12">
+                <hr class="section-line">
+                <h2 id="bspline-policy">B-spline Policy</h2>
+
+                <p>
+                    <span style="color: #750014; font-weight: 600;">How do you learn a B-spline policy?</span>
+                    Rather than predicting a set of fixed-rate waypoints, B-spline Policy parameterizes the
+                    action space as a continuous B-spline trajectory. 
+<!--                     
+                    Given a knot vector $U$ and a set of
+                    control points $C = \{c_0, \dots, c_N\}$, the
+                    continuous action at normalized time $u$ is
+                </p>
+
+                <p style="text-align: center;">
+                    $$ \mathbf{a}(u) \;=\; \sum_{i=0}^{N} N_{i,p}(u)\, c_i, $$
+                </p>
+
+                <p>
+                    where $N_{i,p}(u)$ is the $i$-th basis function of degree $p$ (we use cubic B-splines, $p=3$). This
+                    turns the policy output from a list of sampled poses into the parameters of a smooth curve that can
+                    be sampled at any control frequency.
+                </p> -->
+
+                <p>
+                    <span style="color: #750014; font-weight: 600;">Training.</span>
+                    Each demonstration is first converted into a B-spline (see <a href="#adaptive-fitting">Fitting a B-spline</a>). Exploiting the local support of
+                    B-splines, the policy predicts the next B-spline segment &mdash; both the control points and the knot
+                    values as one fixed-size vector; serving as a drop-in replacement for action-chunk
+                    policies such as Diffusion Policy and ACT.
+                </p>
+
+                <figure class="policy-figure" aria-label="B-spline Policy inference overview">
+                    <img src="assets/method.svg" alt="B-spline Policy inference overview"
+                         style="width: 100%; height: auto; display: block;">
+                    <!-- <figcaption style="text-align: center; margin-top: 8px; font-size: 0.85em; color: #777; font-style: italic;">
+                        At each inference step, the policy takes images and proprioception as the input and outputs future
+                        B-spline segment parameters. At the low-level control stage, we align each successive B-spline
+                        segment with the prior one. The predicted B-spline segment can be temporally scaled to adjust
+                        execution speed. Actions are then sampled at a higher frequency and sent to the robot controller.
+                    </figcaption> -->
+                </figure>
+
+                <p>
+                    <span style="color: #750014; font-weight: 600;">Inference and Execution.</span>
+                    At each inference step, the policy takes images and proprioception as the input and outputs future
+                    B-spline segment parameters. At the low-level control stage, we align each successive B-spline
+                    segment with the prior one. The predicted B-spline segment can be temporally scaled to adjust
+                    execution speed. Importantly, because B-splines are differentiable, the controller can obtain desired position, velocity, and acceleration directly from the B-spline curve and its derivatives, enabling velocity-aware control or PD control with feedforward terms before sending commands to the robot.
+
+                    <!-- Actions are then sampled at a higher frequency and sent to the robot controller. -->
+
+                    <!-- Because the output is a continuous curve, we decouple the policy rate from the control rate: the policy
+                    runs slowly while the controller samples the segment densely. Speed is set by rescaling time with a
+                    factor $n$, $\mathbf{a}_{\text{exec}}(t) = \mathbf{a}(n t)$, which preserves the trajectory's shape
+                    while traversing it faster &mdash; no retraining and none of the jerky motion of naively sped-up
+                    waypoints. For long-horizon tasks, a lightweight <em>segment alignment</em> step matches each new
+                    segment to the last executed action, keeping consecutive segments continuous at high speed. -->
+                </p>
+            </div>
+        </div>
+
+        <div class="row top30 bottom30" id="experiments-section">
+            <div class="col-md-12">
+                <hr class="section-line">
+                <h2 id="experiments">Experiments</h2>
+
+                <p>
+                    We integrate B-spline Policy into two imitation-learning backbones, Diffusion Policy
+                    and ACT; and evaluate it on three real-world tasks. 
+                    <!-- that span distinct challenges: <em>Cube Picking</em> (precise object manipulation), <em>Table Cleaning</em>
+                    (long-horizon rearrangement), and <em>Speed Stacking</em> (bimanual, contact-rich), along with the
+                    Push-T, RoboMimic, and RoboCasa simulation benchmarks. Across configurations BSP consistently
+                    reduces task completion time while preserving or improving success rate &mdash; for example, cutting
+                    Table Cleaning time roughly in half at a 4&#215; speedup &mdash; and produces visibly smoother motion. -->
+                <!-- </p> -->
+<!-- 
+                <div class="experiment-grid">
+                    <figure class="experiment-item">
+                        <video class="experiment-video" controls muted loop playsinline preload="metadata">
+                            <source src="assets/real-world-demo-raw/table-cleaning/clean-table-act-1-1.mp4" type="video/mp4">
+                        </video>
+                        <figcaption style="text-align: center; margin-top: 8px; font-size: 0.85em; color: #777; font-style: italic;">
+                            ACT
+                        </figcaption>
+                    </figure>
+
+                    <figure class="experiment-item">
+                        <video class="experiment-video" controls muted loop playsinline preload="metadata">
+                            <source src="assets/real-world-demo-raw/table-cleaning/clean-table-act-bspline-4x.mp4" type="video/mp4">
+                        </video>
+                        <figcaption style="text-align: center; margin-top: 8px; font-size: 0.85em; color: #777; font-style: italic;">
+                            ACT B-spline 4x
+                        </figcaption>
+                    </figure>
+                </div> -->
+
+                <!-- <h3 id="real-video-details" class="real-video-title">Detailed Video Comparisons</h3>
+                <p class="real-video-intro">
+                    The rollouts below show the same real-world tasks across the base policy and BSP variants at
+                    increasing execution speeds.
+                </p> -->
+
+                <div id="real-video-details" class="real-video-comparisons" aria-label="Detailed real-world video comparisons">
+                    <section class="real-video-task">
+                        <div class="real-video-head">
+                            <h4>Speed Stacking</h4>
+                            <span class="real-video-hint">
+                                <svg viewBox="0 0 30 14" fill="none" aria-hidden="true">
+                                    <path d="M3 7h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Click to play
+                            </span>
+                            <div class="real-video-controls">
+                                <button class="real-video-control" type="button" data-real-video-action="reset">Reset</button>
+                                <button class="real-video-control" type="button" data-real-video-action="play">Play all</button>
+                            </div>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/dp-speed-stacking.mp4" poster="assets/real-experiments/posters/dp-speed-stacking.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>Diffusion Policy</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/dp-bspline-speed-stacking-1x.mp4" poster="assets/real-experiments/posters/dp-bspline-speed-stacking-1x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/dp-bspline-speed-stacking-2x.mp4" poster="assets/real-experiments/posters/dp-bspline-speed-stacking-2x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/dp-bspline-speed-stacking-4x.mp4" poster="assets/real-experiments/posters/dp-bspline-speed-stacking-4x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 4x</span>
+                            </figure>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/act-speed-stacking-1.mp4" poster="assets/real-experiments/posters/act-speed-stacking-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/act-bspline-speed-stacking-1x.mp4" poster="assets/real-experiments/posters/act-bspline-speed-stacking-1x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/act-bspline-speed-stacking-2x.mp4" poster="assets/real-experiments/posters/act-bspline-speed-stacking-2x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/act-bspline-speed-stacking-3x.mp4" poster="assets/real-experiments/posters/act-bspline-speed-stacking-3x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 3x</span>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <section class="real-video-task">
+                        <div class="real-video-head">
+                            <h4>Table Cleaning</h4>
+                            <span class="real-video-hint">
+                                <svg viewBox="0 0 30 14" fill="none" aria-hidden="true">
+                                    <path d="M3 7h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Click to play
+                            </span>
+                            <div class="real-video-controls">
+                                <button class="real-video-control" type="button" data-real-video-action="reset">Reset</button>
+                                <button class="real-video-control" type="button" data-real-video-action="play">Play all</button>
+                            </div>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-dp-1.mp4" poster="assets/real-experiments/posters/clean-table-dp-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>Diffusion Policy</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-dp-bspline-1x-1.mp4" poster="assets/real-experiments/posters/clean-table-dp-bspline-1x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-dp-bspline-2x-1.mp4" poster="assets/real-experiments/posters/clean-table-dp-bspline-2x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-dp-bspline-4x-1.mp4" poster="assets/real-experiments/posters/clean-table-dp-bspline-4x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 4x</span>
+                            </figure>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-act-1-2.mp4" poster="assets/real-experiments/posters/clean-table-act-1-2.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-act-bspline-1x.mp4" poster="assets/real-experiments/posters/clean-table-act-bspline-1x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-act-bspline-2x.mp4" poster="assets/real-experiments/posters/clean-table-act-bspline-2x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/clean-table-act-bspline-4x.mp4" poster="assets/real-experiments/posters/clean-table-act-bspline-4x.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 4x</span>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <section class="real-video-task">
+                        <div class="real-video-head">
+                            <h4>Cube Picking</h4>
+                            <span class="real-video-hint">
+                                <svg viewBox="0 0 30 14" fill="none" aria-hidden="true">
+                                    <path d="M3 7h26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M9 2L3 7l6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Click to play
+                            </span>
+                            <div class="real-video-controls">
+                                <button class="real-video-control" type="button" data-real-video-action="reset">Reset</button>
+                                <button class="real-video-control" type="button" data-real-video-action="play">Play all</button>
+                            </div>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-dp-1.mp4" poster="assets/real-experiments/posters/pick-cube-dp-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>Diffusion Policy</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-dp-bspline-1x-1.mp4" poster="assets/real-experiments/posters/pick-cube-dp-bspline-1x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-dp-bspline-2x-1.mp4" poster="assets/real-experiments/posters/pick-cube-dp-bspline-2x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-dp-bspline-4x-1.mp4" poster="assets/real-experiments/posters/pick-cube-dp-bspline-4x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>DP B-spline 4x</span>
+                            </figure>
+                        </div>
+
+                        <div class="real-video-grid">
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-act-1.mp4" poster="assets/real-experiments/posters/pick-cube-act-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-act-bspline-1x-1.mp4" poster="assets/real-experiments/posters/pick-cube-act-bspline-1x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 1x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-act-bspline-2x-1.mp4" poster="assets/real-experiments/posters/pick-cube-act-bspline-2x-1.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 2x</span>
+                            </figure>
+                            <figure class="real-video-cell">
+                                <div class="real-video-media">
+                                    <video src="assets/real-experiments/videos/pick-cube-act-bspline-4x-2.mp4" poster="assets/real-experiments/posters/pick-cube-act-bspline-4x-2.jpg" muted playsinline preload="metadata"></video>
+                                </div>
+                                <span>ACT B-spline 4x</span>
+                            </figure>
+                        </div>
+                    </section>
+                </div>
+                <h3 id="real-world-results" class="real-results-title">Real-World Results</h3>
+
+                <figure class="real-results-figure">
+                <div class="real-results-scroll" role="region" aria-label="Real-world success rate and average completion time" tabindex="0">
+                    <table class="real-results-full">
+                        <thead>
+                            <tr>
+                                <th rowspan="3">Task</th>
+                                <th rowspan="3">Metric</th>
+                                <th colspan="6">Diffusion Policy</th>
+                                <th colspan="6" class="group-end">Regression Policy</th>
+                                <th colspan="3">DemoSpeedUp Comparison</th>
+                            </tr>
+                            <tr>
+                                <th colspan="2">1X</th>
+                                <th colspan="2">2X</th>
+                                <th colspan="2">4X</th>
+                                <th colspan="2">1X</th>
+                                <th colspan="2">2X</th>
+                                <th colspan="2" class="group-end">4X</th>
+                                <th rowspan="2">DemoSpeedUp</th>
+                                <th rowspan="2">Diff.&nbsp;+ BSP&nbsp;4X</th>
+                                <th rowspan="2">Reg.&nbsp;+ BSP&nbsp;4X</th>
+                            </tr>
+                            <tr>
+                                <th>Diff.</th>
+                                <th class="bsp-col">Diff.&nbsp;+ BSP</th>
+                                <th>Diff.</th>
+                                <th class="bsp-col">Diff.&nbsp;+ BSP</th>
+                                <th>Diff.</th>
+                                <th class="bsp-col group-end">Diff.&nbsp;+ BSP</th>
+                                <th>Reg.</th>
+                                <th class="bsp-col">Reg.&nbsp;+ BSP</th>
+                                <th>Reg.</th>
+                                <th class="bsp-col">Reg.&nbsp;+ BSP</th>
+                                <th>Reg.</th>
+                                <th class="bsp-col group-end">Reg.&nbsp;+ BSP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="task-cell">Cube Picking</td>
+                                <td class="metric-cell"><span>Success rate</span><span>Avg. time</span></td>
+                                <td class="result-cell"><span>19/20</span><span>6.48s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">20/20</span><span class="time-win">6.31s</span></td>
+                                <td class="result-cell"><span>20/20</span><span>4.58s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">20/20</span><span class="time-win">3.43s</span></td>
+                                <td class="result-cell"><span>20/20</span><span>3.52s</span></td>
+                                <td class="result-cell bsp-col group-end"><span class="sr-win">20/20</span><span class="time-win">2.45s</span></td>
+                                <td class="result-cell"><span>18/20</span><span>9.84s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">19/20</span><span class="time-win">7.92s</span></td>
+                                <td class="result-cell"><span>15/20</span><span>5.55s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">19/20</span><span class="time-win">3.36s</span></td>
+                                <td class="result-cell"><span>19/20</span><span>3.74s</span></td>
+                                <td class="result-cell bsp-col group-end"><span class="sr-win">19/20</span><span class="time-win">2.08s</span></td>
+                                <td class="result-cell"><span>18/20</span><span>6.66s</span></td>
+                                <td class="result-cell"><span class="sr-win">20/20</span><span>2.45s</span></td>
+                                <td class="result-cell"><span>19/20</span><span class="time-win">2.08s</span></td>
+                            </tr>
+                            <tr>
+                                <td class="task-cell">Table Cleaning</td>
+                                <td class="metric-cell"><span>Success rate</span><span>Avg. time</span></td>
+                                <td class="result-cell"><span>11/20</span><span>41.40s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">15/20</span><span class="time-win">36.97s</span></td>
+                                <td class="result-cell"><span class="sr-win">15/20</span><span>28.87s</span></td>
+                                <td class="result-cell bsp-col"><span>14/20</span><span class="time-win">20.81s</span></td>
+                                <td class="result-cell"><span class="sr-win">12/20</span><span>23.31s</span></td>
+                                <td class="result-cell bsp-col group-end"><span>11/20</span><span class="time-win">18.05s</span></td>
+                                <td class="result-cell"><span>13/20</span><span>49.70s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">18/20</span><span class="time-win">38.47s</span></td>
+                                <td class="result-cell"><span>13/20</span><span>34.48s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">18/20</span><span class="time-win">19.11s</span></td>
+                                <td class="result-cell"><span>13/20</span><span>23.57s</span></td>
+                                <td class="result-cell bsp-col group-end"><span class="sr-win">14/20</span><span class="time-win">11.80s</span></td>
+                                <td class="result-cell"><span>3/20</span><span>49.47s</span></td>
+                                <td class="result-cell"><span>11/20</span><span>18.05s</span></td>
+                                <td class="result-cell"><span class="sr-win">14/20</span><span class="time-win">11.80s</span></td>
+                            </tr>
+                            <tr>
+                                <td class="task-cell">Speed Stacking</td>
+                                <td class="metric-cell"><span>Success rate</span><span>Avg. time</span></td>
+                                <td class="result-cell"><span>14/20</span><span>20.47s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">14/20</span><span class="time-win">18.13s</span></td>
+                                <td class="result-cell"><span>15/20</span><span>13.66s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">15/20</span><span class="time-win">11.45s</span></td>
+                                <td class="result-cell"><span class="sr-win">9/20</span><span>10.49s</span></td>
+                                <td class="result-cell bsp-col group-end"><span>7/20</span><span class="time-win">9.62s</span></td>
+                                <td class="result-cell"><span>8/20</span><span>19.75s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">16/20</span><span class="time-win">17.61s</span></td>
+                                <td class="result-cell"><span>4/20</span><span>13.49s</span></td>
+                                <td class="result-cell bsp-col"><span class="sr-win">13/20</span><span class="time-win">10.98s</span></td>
+                                <td class="result-cell"><span class="sr-win">8/20</span><span class="time-win">10.42s</span></td>
+                                <td class="result-cell bsp-col group-end"><span>0/20</span><span>NA</span></td>
+                                <td class="result-cell"><span>3/20</span><span>18.57s</span></td>
+                                <td class="result-cell"><span class="sr-win">7/20</span><span class="time-win">9.62s</span></td>
+                                <td class="result-cell"><span>0/20</span><span>NA</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <figcaption class="real-results-caption">
+                    Success rate and average completion time (over successful
+                    rollouts) on the real-world tasks. In each comparison we highlight the
+                    <span class="sr-win">higher success rate</span> and <span class="time-win">shorter completion time</span>.
+                </figcaption>
+                </figure>
+                <h3 class="real-results-title">Findings</h3>
+
+                <ul class="real-results-findings">
+                    <li><b>BSP consistently shortens completion time.</b> Across every real-world setting, BSP reduces average completion time whether paired with a Diffusion or Regression policy. 
+                        <!-- The effect is largest on long-horizon Table Cleaning: at 4&times; speedup, Regression&nbsp;+&nbsp;BSP cuts completion time from 23.57s to 11.80s (a 50% reduction) while preserving success (13/20 vs.&nbsp;14/20).</li> -->
+                    <!-- <li class="real-results-figure-item">
+                        <figure class="real-results-figure">
+                            <img src="assets/smoothness-3.png" alt="Speed stacking rollout comparison showing jerky Diffusion Policy trajectories and smoother, faster Diffusion plus B-spline trajectories.">
+                            <figcaption>More smoothness examples are shown in the <a href="#real-video-details">detailed video comparisons</a> below.</figcaption>
+                        </figure>
+                    </li> -->
+                    <li><b>Success is preserved, but aggressive speedup has limits.</b> BSP matches or improves success rate in 14 of 18 comparisons. 
+                        <!-- For the Regression backbone it lifts Table Cleaning from 13/20 to 18/20 (at 1&times; and 2&times;) and Speed Stacking from 8/20 to 16/20 (1&times;) and 4/20 to 13/20 (2&times;).  -->
+                        The trade-off appears at the extreme: Speed Stacking Regression&nbsp;+&nbsp;BSP drops to zero at 4&times;, where aggressive temporal scaling pushes the robot past its low-level controller's tracking limits.</li>
+                    <li><b>Smoother execution.</b> B-spline actions produce smoother trajectories than discrete action chunks, avoiding the jerky motion that chunk-boundary discontinuities (<a href="assets/bsp.mp4" target="_self">see the videos</a>).</li>
+                    <li class="real-results-split-finding">
+                        <p><b>Segment alignment is critical.</b> Inference-time segment alignment keeps consecutive spline segments continuous, which is critical for stable high-speed execution. Without it, success becomes highly sensitive to speed as discontinuities push the policy out of distribution.</p>
+                        <figure class="real-results-figure">
+                            <img src="assets/table5-combined-1.png" alt="Alignment ablation showing higher achieved speedup and success rate with segment alignment than without alignment." style="border: none; border-radius: 0;">
+                        </figure>
+                    </li>
+                </ul>
+
+                <h3 id="simulation" class="sim-results-title">Simulation Benchmarks</h3>
+                <p class="sim-results-intro">
+                    We also evaluate BSP on Push-T, RoboMimic, and RoboCasa simulation tasks.
+                     <!-- to check whether the -->
+                    <!-- continuous B-spline action representation preserves imitation-learning performance across simulated -->
+                    <!-- manipulation settings. -->
+                </p>
+
+                <div class="sim-result-grid" aria-label="Simulation benchmark videos and success rates">
+                    <article class="sim-result-card">
+                        <h4>Push-T</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/pusht_4k.mp4" poster="assets/sim-experiments/posters/pusht_4k.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>72%</td><td>63%</td></tr>
+                                <tr><th>+BSP</th><td class="success-highlight">75%</td><td class="success-highlight">66%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="sim-result-card">
+                        <h4>Lift</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/lift_fixed_1080p.mp4" poster="assets/sim-experiments/posters/lift_fixed_1080p.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>100%</td><td class="success-highlight">99%</td></tr>
+                                <tr><th>+BSP</th><td>100%</td><td>91%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="sim-result-card">
+                        <h4>Sink Faucet</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/TurnOffSinkFaucet_4k.mp4" poster="assets/sim-experiments/posters/TurnOffSinkFaucet_4k.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>79%</td><td>84%</td></tr>
+                                <tr><th>+BSP</th><td class="success-highlight">85%</td><td class="success-highlight">94%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="sim-result-card">
+                        <h4>Coffee Button</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/CoffeePressButton_4k.mp4" poster="assets/sim-experiments/posters/CoffeePressButton_4k.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>93%</td><td>89%</td></tr>
+                                <tr><th>+BSP</th><td class="success-highlight">94%</td><td class="success-highlight">93%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="sim-result-card">
+                        <h4>Microwave</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/TurnOffMicrowave_4k.mp4" poster="assets/sim-experiments/posters/TurnOffMicrowave_4k.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>77%</td><td>93%</td></tr>
+                                <tr><th>+BSP</th><td class="success-highlight">89%</td><td class="success-highlight">97%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+
+                    <article class="sim-result-card">
+                        <h4>Close Door</h4>
+                        <div class="real-video-media">
+                            <video src="assets/sim-experiments/videos/CloseSingleDoor_4k.mp4" poster="assets/sim-experiments/posters/CloseSingleDoor_4k.jpg" muted autoplay loop playsinline preload="metadata"></video>
+                        </div>
+                        <table class="sim-result-table">
+                            <thead>
+                                <tr><th></th><th>DP</th><th>Reg.</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th>Base</th><td>27%</td><td>40%</td></tr>
+                                <tr><th>+BSP</th><td class="success-highlight">46%</td><td class="success-highlight">60%</td></tr>
+                            </tbody>
+                        </table>
+                    </article>
+                </div>
+
+                <p class="sim-results-note">
+                    We find that BSP generally matches or improves baseline success rates across these
+                    simulation benchmarks.
+                     <!-- with the largest gains on the RoboCasa tasks. -->
+                </p>
+<!-- 
+                <div class="pusht-speedup-panel" aria-label="Push-T speedup results">
+                    <h4>Push-T Speedup</h4>
+                    <table class="pusht-speedup-table">
+                        <thead>
+                            <tr>
+                                <th>Target</th>
+                                <th>Score<br>Diff.</th>
+                                <th>Score<br>+BSP</th>
+                                <th>Time<br>Diff.</th>
+                                <th>Time<br>+BSP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1X</th>
+                                <td>0.47</td>
+                                <td class="bsp-cell">0.65</td>
+                                <td>12.24s</td>
+                                <td class="bsp-cell">7.20s</td>
+                            </tr>
+                            <tr>
+                                <th>2X</th>
+                                <td>0.57</td>
+                                <td class="bsp-cell">0.71</td>
+                                <td>9.22s</td>
+                                <td class="bsp-cell">4.89s</td>
+                            </tr>
+                            <tr>
+                                <th>4X</th>
+                                <td>0.59</td>
+                                <td class="bsp-cell">0.73</td>
+                                <td>7.19s</td>
+                                <td class="bsp-cell">2.87s</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="pusht-speedup-summary">
+                        BSP improves both score and completion time at every target speedup; at 4X, it raises score from 0.59 to 0.73 while cutting time from 7.19s to 2.87s.
+                    </p>
+                </div> -->
+                <script>
+                    (function () {
+                        var experimentsRoot = document.getElementById('experiments-section');
+                        if (!experimentsRoot) return;
+                        var mediaVideos = Array.prototype.slice.call(experimentsRoot.querySelectorAll('.real-video-media video'));
+                        var rows = experimentsRoot.querySelectorAll('.real-video-task');
+                        // Click-to-play videos are exclusive: only one session plays at a time.
+                        // Starting a single video (session = that video) or a row's "Play all"
+                        // (session = that row) pauses everything else currently playing.
+                        var exclusiveVideos = Array.prototype.slice.call(experimentsRoot.querySelectorAll('.real-video-task video'));
+                        var timerRafs = new WeakMap();
+
+                        function formatTimerSeconds(t) {
+                            if (!isFinite(t) || t < 0) return '0.00s';
+                            return t.toFixed(2) + 's';
+                        }
+                        function ensureTimer(video) {
+                            if (video.closest('.sim-result-card')) return null;
+                            var media = video.closest('.real-video-media');
+                            if (!media) return null;
+                            var timer = media.querySelector('.real-video-timer');
+                            if (!timer) {
+                                timer = document.createElement('div');
+                                timer.className = 'real-video-timer';
+                                timer.textContent = '0.00s';
+                                media.appendChild(timer);
+                            }
+                            return timer;
+                        }
+                        function updateTimer(video) {
+                            var timer = ensureTimer(video);
+                            if (!timer) return;
+                            timer.textContent = formatTimerSeconds(video.currentTime || 0);
+                        }
+                        function stopTimerLoop(video) {
+                            if (typeof cancelAnimationFrame !== 'function') return;
+                            var raf = timerRafs.get(video);
+                            if (raf) cancelAnimationFrame(raf);
+                            timerRafs.delete(video);
+                        }
+                        function startTimerLoop(video) {
+                            stopTimerLoop(video);
+                            if (typeof requestAnimationFrame !== 'function') {
+                                updateTimer(video);
+                                return;
+                            }
+                            function tick() {
+                                updateTimer(video);
+                                if (!video.paused && !video.ended) {
+                                    timerRafs.set(video, requestAnimationFrame(tick));
+                                } else {
+                                    timerRafs.delete(video);
+                                }
+                            }
+                            timerRafs.set(video, requestAnimationFrame(tick));
+                        }
+
+                        function isExclusive(video) {
+                            return exclusiveVideos.indexOf(video) !== -1;
+                        }
+                        function stopOthers(keep) {
+                            exclusiveVideos.forEach(function (v) {
+                                if (keep.indexOf(v) === -1 && !v.paused) {
+                                    v.pause();
+                                }
+                            });
+                        }
+                        function setButtonState(video, button) {
+                            if (!button) return;
+                            var isPlaying = !video.paused && !video.ended;
+                            button.classList.toggle('is-playing', isPlaying);
+                            button.setAttribute('aria-label', isPlaying ? 'Pause video' : 'Play video');
+                        }
+
+                        function toggleVideo(video, button) {
+                            if (video.paused || video.ended) {
+                                if (isExclusive(video)) stopOthers([video]);
+                                video.muted = true;
+                                video.play().catch(function () {});
+                            } else {
+                                video.pause();
+                            }
+                            setButtonState(video, button);
+                        }
+
+                        function setDone(video, isDone) {
+                            var media = video.closest('.real-video-media');
+                            if (media) media.classList.toggle('is-done', isDone);
+                        }
+
+                        mediaVideos.forEach(function (video) {
+                            var media = video.closest('.real-video-media');
+                            var button = document.createElement('button');
+                            button.className = 'real-video-play';
+                            button.type = 'button';
+                            button.setAttribute('aria-label', 'Play video');
+
+                            if (media) {
+                                ensureTimer(video);
+                                if (!video.closest('.sim-result-card')) {
+                                    var speed = document.createElement('div');
+                                    speed.className = 'real-video-speed';
+                                    speed.textContent = 'real-time';
+                                    media.appendChild(speed);
+                                }
+                                media.appendChild(button);
+                                var done = document.createElement('div');
+                                done.className = 'real-video-done';
+                                done.textContent = 'Done';
+                                media.appendChild(done);
+                            }
+
+                            button.addEventListener('click', function (ev) {
+                                ev.stopPropagation();
+                                toggleVideo(video, button);
+                            });
+                            video.addEventListener('click', function () {
+                                toggleVideo(video, button);
+                            });
+                            video.addEventListener('play', function () {
+                                startTimerLoop(video);
+                                setDone(video, false);
+                                setButtonState(video, button);
+                            });
+                            video.addEventListener('pause', function () {
+                                stopTimerLoop(video);
+                                updateTimer(video);
+                                setButtonState(video, button);
+                            });
+                            video.addEventListener('ended', function () {
+                                stopTimerLoop(video);
+                                updateTimer(video);
+                                setDone(video, true);
+                                setButtonState(video, button);
+                            });
+                            video.addEventListener('loadedmetadata', function () {
+                                updateTimer(video);
+                            });
+                            video.addEventListener('seeked', function () {
+                                updateTimer(video);
+                            });
+                            updateTimer(video);
+                        });
+
+                        rows.forEach(function (row) {
+                            var videos = Array.prototype.slice.call(row.querySelectorAll('video'));
+                            var reset = row.querySelector('[data-real-video-action="reset"]');
+                            var play = row.querySelector('[data-real-video-action="play"]');
+
+                            function resetVideos() {
+                                videos.forEach(function (video) {
+                                    video.pause();
+                                    stopTimerLoop(video);
+                                    try { video.currentTime = 0; } catch (e) {}
+                                    video.load();
+                                    updateTimer(video);
+                                    setDone(video, false);
+                                    setButtonState(video, video.parentElement && video.parentElement.querySelector('.real-video-play'));
+                                });
+                            }
+
+                            function playVideos() {
+                                stopOthers(videos);
+                                videos.forEach(function (video) {
+                                    video.pause();
+                                    try { video.currentTime = 0; } catch (e) {}
+                                    setDone(video, false);
+                                });
+
+                                window.requestAnimationFrame(function () {
+                                    videos.forEach(function (video) {
+                                        video.muted = true;
+                                        video.play().catch(function () {});
+                                        setButtonState(video, video.parentElement && video.parentElement.querySelector('.real-video-play'));
+                                    });
+                                });
+                            }
+
+                            if (reset) reset.addEventListener('click', resetVideos);
+                            if (play) play.addEventListener('click', playVideos);
+                        });
+
+                        document.querySelectorAll('.sim-result-card video').forEach(function (video) {
+                            video.muted = true;
+                            video.loop = true;
+                            video.play().catch(function () {});
+                        });
+                    })();
+                </script>
+            </div>
+        </div>
+
+        <div class="row top30 bottom30" id="ack-section">
+            <div class="col-md-12">
+                <hr class="section-line">
+                <h2 id="acknowledgements">Acknowledgements</h2>
+                <p>
+                    Acknowledgements are omitted for anonymous review.
+                </p>
+            </div>
+        </div>
+
+        <div style="height: 100px;"></div>
+    </div>
+
+    <script>
+        (function () {
+            var links = Array.prototype.slice.call(document.querySelectorAll('.page-toc a'));
+            if (!links.length || !('IntersectionObserver' in window)) return;
+            var map = {};
+            var targets = [];
+            links.forEach(function (a) {
+                var id = a.getAttribute('href').slice(1);
+                var el = document.getElementById(id);
+                if (el) { map[id] = a; targets.push(el); }
+            });
+
+            function setActive(id) {
+                links.forEach(function (a) { a.classList.remove('is-active'); });
+                if (map[id]) map[id].classList.add('is-active');
+            }
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) setActive(e.target.id);
+                });
+            }, { rootMargin: '0px 0px -85% 0px', threshold: 0 });
+
+            targets.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+    <script>
+        // Align the left-rail Contents bar with the top of the teaser video,
+        // which sits just below the full-width divider line. Computed because
+        // the header height is variable and the body is zoomed.
+        (function () {
+            var ZOOM = 1.15;
+            function alignToc() {
+                var toc = document.querySelector('.page-toc');
+                var video = document.getElementById('hero-demo-dp');
+                if (!toc || !video) return;
+                var rect = video.getBoundingClientRect();
+                var docTop = rect.top + window.pageYOffset;
+                toc.style.top = (docTop / ZOOM) + 'px';
+            }
+            window.addEventListener('load', alignToc);
+            window.addEventListener('resize', alignToc);
+            alignToc();
+        })();
+    </script>
+    <script>
+        // Make the main content column as wide as the subtitle line.
+        (function () {
+            var ZOOM = 1.15;
+            function sizeContainers() {
+                var sub = document.getElementById('subtitle-line');
+                if (!sub) return;
+                var w = sub.getBoundingClientRect().width / ZOOM;
+                document.querySelectorAll('.container').forEach(function (c) {
+                    c.style.maxWidth = w + 'px';
+                });
+            }
+            sizeContainers();
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(sizeContainers);
+            }
+            window.addEventListener('load', sizeContainers);
+        })();
+    </script>
+</body>
+
+</html>

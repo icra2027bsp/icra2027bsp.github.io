@@ -1,0 +1,15 @@
+{
+  "name": "b-spline-policy-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dev-only test harness for the B-Spline Policy landing page (index.html). These files do not ship with the page.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "fast-check": "^3.23.1",
+    "jsdom": "^25.0.1",
+    "vitest": "^2.1.8"
+  }
+}
