@@ -2079,16 +2079,6 @@
             To address these issues, we propose B-spline Policy. Instead of predicting fixed-rate waypoint chunks, it represents action trajectories as continuous B-spline curves.
             At execution time, the continuous curves can be sampled at any desired control frequency and temporally rescaled to traverse the same trajectory in less time, enabling faster and smoother motion.
 
-                <!--
-                  Scrubbable video player (kept from the reference layout).
-                  To use it, replace a `.teleop-placeholder` with:
-                    <div class="rollout-video-wrap">
-                      <video class="rollout-video" muted loop playsinline preload="metadata">
-                        <!-- add a local MP4 source here when extending this demo -->
-                      </video>
-                    </div>
-                  and add the card's id to the `roots` list below.
-                -->
                 <script>
                     (function () {
                         const roots = ['rtsim-showcase']
